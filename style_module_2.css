@@ -13,7 +13,7 @@ body {
 }
 
 .kitchen-bg {
-  background: url("../asset/bg_kitchen.png") center center / cover no-repeat;
+  background: url("bg_kitchen.png") center center / cover no-repeat;
   height: 100vh;
   position: relative;
   animation: fadeIn 3s ease-in-out forwards;
