@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Think Before You Throw</title>
-  <link rel="stylesheet" href="../Code/style.css">
+  <link rel="stylesheet" href="style.css">
   <style>
     html, body {
       height: 100%;
@@ -26,7 +26,7 @@
     }
 
     .game-container {
-  background-image: url('../asset/food_background.jpg'); /* update path as needed */
+  background-image: url('food_background.jpg'); /* update path as needed */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -281,7 +281,7 @@
 </head>
 <body>
 <!-- Add your existing audio_1 -->
-<audio id="audio_1" src="../audio/audio_1.mp3" preload="auto"></audio>
+<audio id="audio_1" src="audio_1.mp3" preload="auto"></audio>
 
   <section class="game-container">
     <h2 class="highlighted-text">Think Before You Throw</h2>
@@ -289,19 +289,19 @@
 
     <div class="food-items">
       <div class="food_wrapper">
-        <img src="../image_mini_game/rice.png" alt="Rice" class="food" draggable="true" data-calories="200" data-name="Rice">
+        <img src="./image_mini_game/rice.png" alt="Rice" class="food" draggable="true" data-calories="200" data-name="Rice">
         <div class="food_label">Rice</div>
       </div>
       <div class="food_wrapper">
-        <img src="../image_mini_game/chicken.png" alt="Chicken" class="food" draggable="true" data-calories="250" data-name="Chicken">
+        <img src="./image_mini_game/chicken.png" alt="Chicken" class="food" draggable="true" data-calories="250" data-name="Chicken">
         <div class="food_label">Chicken</div>
       </div>
       <div class="food_wrapper">
-        <img src="../image_mini_game/bread.png" alt="Bread" class="food" draggable="true" data-calories="80" data-name="Bread">
+        <img src="./image_mini_game/bread.png" alt="Bread" class="food" draggable="true" data-calories="80" data-name="Bread">
         <div class="food_label">Bread</div>
       </div>
       <div class="food_wrapper">
-        <img src="../image_mini_game/veggie.png" alt="Vegetables" class="food" draggable="true" data-calories="50" data-name="Vegetables">
+        <img src="./image_mini_game/veggie.png" alt="Vegetables" class="food" draggable="true" data-calories="50" data-name="Vegetables">
         <div class="food_label">Vegetables</div>
       </div>
     </div>
@@ -322,9 +322,9 @@
 
   <div id="overlay" class="overlay"><span id="overlayText"></span></div>
 
-  <audio id="introMusic" src="../audio/audio_1.mp3" preload="auto" loop muted></audio>
-<audio id="overlayMusic" src="../audio/audio_2.mp3" preload="auto" loop></audio>
-<audio id="successAudio" src="../audio/audio_1.mp3"></audio>
+  <audio id="introMusic" src="audio_1.mp3" preload="auto" loop muted></audio>
+<audio id="overlayMusic" src="audio_2.mp3" preload="auto" loop></audio>
+<audio id="successAudio" src="audio_1.mp3"></audio>
 
 
   <section id="storySection" class="story-section">
