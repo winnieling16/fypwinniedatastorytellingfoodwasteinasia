@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Introduction</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            /* Fade-in animation */
+            .fade-in {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease, visibility 1s ease;
+            }
+
+            /* Initial hidden state */
+            .hidden {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease, visibility 1s ease;
+            }
+
+            /* Scroll arrow fade-in */
+            .fade-in-arrow {
+            opacity: 1;
+            transition: opacity 1.5s ease;
+            }
+
+            .scrollCue {
+            opacity: 1;
+            transition: opacity 1.5s ease;
+            width: 80px;
+            display: block;
+            margin: 30px auto;
+            cursor: pointer;
+            }
+        </style>
+    </head>
+    <body id="intro_body">
+        <section class="intro_word">
+            <div class="overlay_text" id="overlayText">Food waste is always happening around us...</div>
+            <button class="continue_btn" onclick="playVideo()">Click to continue</button>
+            <video id="videoContainer" class="video_container" muted playsinline preload="auto">
+                <source src="../video/intro_video.mp4" type="video/mp4">
+            </video>
+            <div id="blackOverlay" class="hidden"></div>
+            <div id="questionText" class="hidden">
+                <p>It looks small, but every small waste adds up… <br> Can you make better choices?</p>
+                <div class="question_btns">
+                <button class="continue_qbtn" onclick="handleAnswer('Yes')">Yes</button>
+                <button class="continue_qbtn" onclick="handleAnswer('Maybe')">Maybe</button>
+                <button class="continue_qbtn" onclick="handleAnswer('No')">No</button>
+                </div>
+            <div id="microText" class="micro_text hidden">Let's find out together.</div>
+            </div>
+            <div id="scrollOverlay" class="hidden">
+                <img src="../asset/Scroll Down Arrow.gif" alt="Scroll down" class="scrollCue hidden">
+            </div>
+            <audio id="bgm" src="../audio/landfill.mp3"></audio>
+        </section>
+        <script>
+            const video = document.getElementById("videoContainer");
+            const overlay_text = document.getElementById("overlayText");
+            const button = document.querySelector(".continue_btn");
+            const scrollOverlay = document.getElementById("scrollOverlay");
+            const scrollArrow = document.querySelector(".scrollCue");
+            const blackOverlay = document.getElementById("blackOverlay");
+            const questionText = document.getElementById("questionText");
+            const microText = document.getElementById("microText");
+            const bgm = document.getElementById("bgm");
+
+            function playVideo(){
+                //hide text and btn
+                overlay_text.style.display = "none";
+                button.style.display = "none";
+
+                // Change background to transparent
+                document.body.style.backgroundColor = "transparent";
+
+                //unmute and play video
+                video.style.display = "block";
+                video.setAttribute("controls", "true");
+                video.muted = false;
+                video.play();
+            }
+
+             video.addEventListener('ended', () => {
+                //fade to black
+                blackOverlay.classList.remove('hidden');
+                questionText.classList.remove('hidden');
+
+                blackOverlay.classList.add('fade-in');
+                questionText.classList.add('fade-in');
+                
+                //play background music
+                bgm.play();
+
+            });
+
+            function handleAnswer(answer){
+                console.log("User answered:", answer);
+                const questionBtns = document.querySelector(".question_btns"); 
+                questionBtns.style.display = 'none';
+
+                //fade in micro Text
+                microText.classList.remove("hidden");
+                microText.classList.add("fade-in");
+
+                // Show scroll arrow after a short delay
+                setTimeout(() => {
+                    scrollOverlay.classList.remove("hidden");
+                    scrollOverlay.classList.add("fade-in");
+                    scrollArrow.classList.remove("hidden");
+                    scrollArrow.classList.add("fade-in-arrow");
+                }, 2500);
+            }
+
+            // Smooth fade out before redirect
+            scrollOverlay.addEventListener('click', () => {
+                // window.location.href = "transition.html";
+                window.location.href = "ink_transition.html";
+            });
+        </script>
+    </body>
+</html>
