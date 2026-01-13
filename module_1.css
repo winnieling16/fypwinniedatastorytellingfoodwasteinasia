@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+  background-color: #faf7f2;
+}
+
+/* Sticky Nav */
+#sideNav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+#sideNav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#sideNav li {
+  margin: 10px 0;
+}
+#sideNav a {
+  text-decoration: none;
+  color: #444;
+  font-weight: bold;
+}
+#sideNav a:hover {
+  color: #b76e22;
+}
+
+/* Section */
+.section {
+  min-height: 100vh;
+  padding: 80px 10%;
+}
+
+/* Vintage Timeline */
+.vintage {
+  background: url('vintage-paper-texture.jpg') center / cover no-repeat;
+  color: #3b2f1d;
+}
+.timeline-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.timeline-item {
+  background: rgba(255, 255, 240, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  width: 250px;
+  transition: transform 0.3s;
+}
+.timeline-item:hover {
+  transform: scale(1.05);
+}
+
+/* Filter panel */
+#filterPanel {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+#filterPanel select {
+  padding: 5px;
+}
+
+.scroll-lock-wrapper .scroll-content .scroll-fade {
+    opacity: 1 !important; 
+    transform: none !important; /* Resets the initial translateY(20px) offset */
+    visibility: visible !important; /* Ensure visibility is set if the base CSS hid it */
+    color: white !important; /* Ensure text color is visible against the dark background */
+}

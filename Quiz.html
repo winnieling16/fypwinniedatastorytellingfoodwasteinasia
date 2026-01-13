@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Waste Impact Quiz + Receipt</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 { margin-bottom: 10px; }
+
+    .quiz-container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .quiz-question { margin-bottom: 15px; }
+    .quiz-options label { display: block; margin: 5px 0; }
+
+    #submitQuiz {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #submitQuiz:hover { background-color: #45a049; }
+
+    .app-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .receipt-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 350px;
+      padding: 20px 20px 5px 20px;
+      background: white;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .receipt-slot-wrapper {
+      position: relative;
+      width: 320px;
+      height: 30px;
+      background: #444;
+      border-radius: 0 0 5px 5px;
+      overflow: visible;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2), inset 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .slot-opening {
+      width: 100%;
+      height: 5px;
+      background: #222;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+
+    #receiptPaper {
+      background: #f7f7f7;
+      width: 280px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: #333;
+      border-radius: 2px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      position: absolute;
+      left: 50%;
+      top: 30px;
+      transform: translateX(-50%);
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 2.5s ease-out;
+    }
+    #receiptPaper.printed {
+      max-height: var(--receipt-height);
+    }
+
+    #textClipper { padding: 20px; }
+
+    .print-line {
+      display: block;
+      margin: 5px 0;
+      opacity: 0;
+      transition: opacity 0.4s ease-in;
+    }
+
+    .receipt-text {
+      text-align: center;
+      line-height: 1.4;
+      border-top: 1px dashed #aaa;
+      border-bottom: 1px dashed #aaa;
+      padding: 10px 0;
+      margin: 10px 0;
+    }
+    .receipt-text h4 {
+      margin-top: 0;
+      font-size: 16px;
+      color: #008000;
+    }
+    .receipt-text p {
+      font-style: italic;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Test Your Memory 🥕</h2>
+
+  <!-- QUIZ SECTION -->
+  <div class="quiz-container">
+    <div class="quiz-question">
+      <p>1. Which country had the highest food waste in 2021?</p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q1" value="A"> China</label>
+        <label><input type="radio" name="q1" value="B"> Indonesia</label>
+        <label><input type="radio" name="q1" value="C"> Afghanistan</label>
+        <label><input type="radio" name="q1" value="D"> India</label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p>2. Among the list, which food are the highest wasted in the Asia?</p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q2" value="A"> Banana</label>
+        <label><input type="radio" name="q2" value="B"> Potato</label>
+        <label><input type="radio" name="q2" value="C"> Olive Oil</label>
+        <label><input type="radio" name="q2" value="D"> Milk</label>
+        <label><input type="radio" name="q2" value="E"> Soy Bean</label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p>3. How does the share of Household food waste compare to Food Service?</p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q3" value="A"> Household has more food waste than Food Service.</label>
+        <label><input type="radio" name="q3" value="B"> Household and Food Service have equal food waste.</label>
+        <label><input type="radio" name="q3" value="C"> Food Service has more food waste than Household.</label>
+        <label><input type="radio" name="q3" value="C"> Household has less food waste than Food Service.</label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p>4. Among this listed consumer behaviour, which country that only allocated Food Quality and Suitability?</p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q4" value="A">India, Indonesia, China</label>
+        <label><input type="radio" name="q4" value="B">China, Bagaladesh</label>
+        <label><input type="radio" name="q4" value="C">Pakistan</label>
+        <label><input type="radio" name="q4" value="D">Indonesia</label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p>5. What is the main factor of Malaysian wasted food?</p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q5" value="A"> Exceed expired date</label>
+        <label><input type="radio" name="q5" value="B"> Buy too much</label>
+        <label><input type="radio" name="q5" value="C"> Food spoil</label>
+        <label><input type="radio" name="q5" value="D"> Forgot</label>
+      </div>
+    </div>
+
+ <div class="quiz-question">
+      <p>6. Among the list following, which group contain the highest percentage:</p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q6" value="A"> Knew both labels</label>
+        <label><input type="radio" name="q6" value="B"> Knew neither</label>
+        <label><input type="radio" name="q6" value="C"> Only knew “Best Before”</label>
+        <label><input type="radio" name="q6" value="D"> Only knew “Use By”</label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p>7. How many percentage about Malaysian cannot differentiate between "use by" and "best before"?</p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q7" value="A"> 32.17%</label>
+        <label><input type="radio" name="q7" value="B"> 35.07%</label>
+        <label><input type="radio" name="q7" value="C"> 33.57%</label>
+        <label><input type="radio" name="q7" value="D"> 33.77%</label>
+      </div>
+    </div>
+
+   <div class="quiz-question">
+      <p>8. Which country in Asia generates the most food waste that could potentially feed the highest number of meals? </p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q8" value="A"> China</label>
+        <label><input type="radio" name="q8" value="B"> Tajikistan</label>
+        <label><input type="radio" name="q8" value="C"> Afghanistan</label>
+        <label><input type="radio" name="q8" value="D"> Bangladesh</label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p>9. Which country has the most highest stunting severity?</p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q9" value="A"> Malaysia</label>
+        <label><input type="radio" name="q9" value="B"> Tajikistan</label>
+        <label><input type="radio" name="q9" value="C"> Afghanistan</label>
+        <label><input type="radio" name="q9" value="D"> Myanmar</label>
+      </div>
+    </div>
+
+    <div class="quiz-question">
+      <p>10. In Southern Asia, does the number of undernourished by region has increased or decreased?</p>
+      <div class="quiz-options">
+        <label><input type="radio" name="q10" value="A"> It increased steadily from 2005 to 2023.</label>
+        <label><input type="radio" name="q10" value="B"> It decreased steadily from 2005 to 2023.</label>
+        <label><input type="radio" name="q10" value="C"> It decreased first, then increased again after 2017.</label>
+        <label><input type="radio" name="q10" value="D"> It remained about the same throughout the period.</label>
+      </div>
+    </div>
+
+    <button id="submitQuiz">Submit Quiz</button>
+  </div>
+
+  <!-- RECEIPT SECTION -->
+  <div class="app-wrapper">
+    <div class="receipt-container">
+      <div class="receipt-slot-wrapper">
+        <div class="slot-opening"></div>
+        <div id="receiptPaper">
+          <div id="textClipper"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const receiptPaper = document.getElementById('receiptPaper');
+    const textClipper = document.getElementById('textClipper');
+    const submitQuiz = document.getElementById('submitQuiz');
+
+    // Correct answers
+    const answers = { q1: "A", q2: "B", q3: "A", q4: "D", q5: "A", q6: "B", q7: "D", q8: "C", q9: "C", q10: "C" };
+
+    submitQuiz.addEventListener('click', () => {
+      let score = 0;
+      let total = Object.keys(answers).length;
+
+      for (let q in answers) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) {
+          score++;
+        }
+      }
+      //define conditional title and message
+      let receiptTitle = "";
+      if (score>=5){
+        receiptTitle = "Thank You, No Waste Hero!";
+      }else{
+        receiptTitle = "Keep Learning, Future Hero!";
+      }
+      const resultMessage = `You scored ${score}/${total}! 🌍 Keep making mindful choices.`;
+      showReceipt(receiptTitle, resultMessage);
+    });
+
+    function showReceipt(title, message) {
+      receiptPaper.classList.remove('printed');
+      textClipper.innerHTML = '';
+
+      const contentHTML = `
+        <span class="print-line">*** ECO-MIND RECEIPT ***</span>
+        <div class="receipt-text">
+          <h4 class="print-line">${title}</h4>
+          <p class="print-line">${message}</p>
+        </div>
+        <span class="print-line">Date: ${new Date().toLocaleDateString()}</span>
+        <span class="print-line">Time: ${new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})}</span>
+        <span class="print-line">#MindfulEating #RespectResources</span>
+      `;
+      textClipper.innerHTML = contentHTML;
+
+      const fullHeight = textClipper.scrollHeight + 40;
+      receiptPaper.style.setProperty("--receipt-height", `${fullHeight}px`);
+
+      setTimeout(() => {
+        receiptPaper.classList.add('printed');
+        const lines = textClipper.querySelectorAll('.print-line');
+        lines.forEach((line, i) => {
+          setTimeout(() => line.style.opacity = '1', i * 400);
+        });
+      }, 100);
+    }
+
+    // --- DRAGGABLE RECEIPT ---
+    receiptPaper.setAttribute("draggable", "true");
+
+    receiptPaper.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", "receipt");
+      receiptPaper.style.opacity = "0.5";
+    });
+
+    receiptPaper.addEventListener("dragend", () => {
+      receiptPaper.style.opacity = "1";
+    });
+
+    document.body.addEventListener("dragover", (e) => e.preventDefault());
+
+    document.body.addEventListener("drop", (e) => {
+      e.preventDefault();
+
+      // Move receipt into body if not already
+      if (receiptPaper.parentElement !== document.body) {
+        document.body.appendChild(receiptPaper);
+      }
+
+      // Position at drop point
+      const rect = receiptPaper.getBoundingClientRect();
+      receiptPaper.style.position = "absolute";
+      receiptPaper.style.zIndex = "999";
+            receiptPaper.style.left = `${e.pageX - rect.width / 2}px`;
+      receiptPaper.style.top = `${e.pageY - rect.height / 2}px`;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+<style>
+  /* Vertical Navigation Menu Styles */
+#vertical-nav-menu {
+    position: fixed;
+    right: 30px; /* Adjust right value to position the menu */
+    top: 50%; 
+    transform: translateY(-50%); 
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    /* Reduced gap because the connector will take space */
+    gap: 0px; 
+    padding: 10px;
+}
+
+/* Wrapper for each dot and its connector */
+.nav-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the dot and connector horizontally */
+}
+
+.nav-dot {
+    position: relative; 
+    display: flex; /* Make it a flex container to center the dot */
+    justify-content: center; /* Center the dot horizontally */
+    align-items: center; /* Center the dot vertically */
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px; /* Added padding to give more clickable area */
+}
+
+.dot {
+    width: 20px; /* Make dots bigger */
+    height: 20px; /* Make dots bigger */
+    background-color: blue; /* Initial blue color for all dots */
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-dot:hover .dot {
+    background-color: yellow; /* Change to yellow on hover */
+    /* You can optionally make it slightly bigger on hover too, e.g.: */
+    /* transform: scale(1.1); */
+}
+
+/* Dot Connector Line */
+.dot-connector {
+    width: 2px; /* Thickness of the line */
+    height: 30px; /* Length of the line between dots */
+    background-color: black; /* Color of the line */
+    margin-top: -5px; /* Adjust to connect cleanly with the dot above */
+    margin-bottom: -5px; /* Adjust to connect cleanly with the dot below */
+}
+
+
+/* Hover Text (Initially Hidden) */
+.hover-text {
+    position: absolute;
+    right: 35px; /* Adjusted distance from the now larger dot */
+    top: 50%;
+    transform: translateY(-50%);
+    
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap; 
+    
+    opacity: 0; 
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    pointer-events: none; 
+    font-family: 'Merriweather', serif; 
+    font-size: 14px;
+}
+
+.nav-dot:hover .hover-text {
+    opacity: 1;
+    visibility: visible;
+}
+</style>
+<body>
+<div id="vertical-nav-menu">
+  <div class="nav-item-wrapper">
+    <a href="#mainContent" class="nav-dot" data-chapter-name="Chapter 1">
+      <span class="hover-text">Chapter 1</span>
+      <div class="dot"></div>
+    </a>
+    <div class="dot-connector"></div> 
+  </div>
+
+  <div class="nav-item-wrapper">
+    <a href="#nextSection" class="nav-dot" data-chapter-name="Chapter 2">
+      <span class="hover-text">Chapter 2</span>
+      <div class="dot"></div>
+    </a>
+    <!-- Optional: add another connector if more dots follow -->
+  </div>
+</div>
+
+<script>
+    let sectionLoaded3 = false;
+
+// Function to handle the navigation logic
+function handleNavigation(targetId) {
+    if (targetId === 'nextSection') {
+        if (!sectionLoaded3) {
+            // If Chapter 2 is not loaded, load it and scroll
+            loadNextSection(); 
+        } else {
+            // If loaded, just scroll smoothly
+            document.getElementById(targetId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    } else {
+        // Scroll to other sections (like Chapter 1)
+        document.querySelector(targetId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+</script>
+</body>
+</html>

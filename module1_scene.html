@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Module 1 — Mapping Food Waste Hotspots</title>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="../Code/module1_scene.css">
+
+  <!-- Three.js CDN -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <!-- 3D canvas container -->
+  <div id="three-container"></div>
+
+  <!-- translucent content overlay -->
+  <div id="ui-overlay">
+    <!-- Future narrator intro -->
+    <div id="narrator">
+      <div class="narrator-line" id="narr-1">“I come from a time when food has meaning again.”</div>
+      <div class="narrator-line" id="narr-2">“These glowing lights were once the places of greatest loss.”</div>
+    </div>
+
+    <!-- Map & hotspots -->
+    <section id="map-panel">
+      <h1 class="panel-title">Food Waste Across Asia</h1>
+      <p class="panel-sub">Hover / tap the hotspots to learn the scale. Scroll to reveal more layers.</p>
+
+      <div id="map-wrapper">
+        <!-- Replace this IMG with your SVG/PNG map. Use a high-res image (transparent background is fine). -->
+        <img id="asia-map" src="assets/asia_map_placeholder.png" alt="Asia map placeholder">
+
+        <!-- Hotspots are created/positioned by JS (data-driven). -->
+      </div>
+
+      <div id="map-legend">
+        <div class="legend-item"><span class="dot small"></span> Low (relatively)</div>
+        <div class="legend-item"><span class="dot med"></span> Medium</div>
+        <div class="legend-item"><span class="dot large"></span> High</div>
+      </div>
+
+    </section>
+
+    <!-- info box -->
+    <div id="info-box" aria-live="polite"></div>
+
+    <!-- CTA -->
+    <div id="cta-wrap">
+      <button id="next-btn">Next → Consumer Behaviour</button>
+    </div>
+  </div>
+
+  <!-- background music -->
+  <audio id="bg-music" loop>
+    <source src="../audio/hook_music.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- script -->
+  <script src="../Code/module1_scene.js"></script>
+</body>
+</html>
