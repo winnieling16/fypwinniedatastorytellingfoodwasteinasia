@@ -70,7 +70,7 @@
 /* Basic styling for scene 2 (using your provided background image path) */
 #module-3-content-wrapper .hunger-bg {
     height: 100vh;
-    background: url("../asset/hunger.jpg") no-repeat center center/cover;
+    background: url("hunger.jpg") no-repeat center center/cover;
     position: relative;
     display: flex;
     align-items: center;
