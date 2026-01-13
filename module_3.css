@@ -162,6 +162,21 @@
     font-size: 28px;
 }
 
+/* Force the container to be black and add space at the bottom */
+#module-3-content-wrapper {
+    background-color: #111111 !important;
+    margin: 0;
+    padding-bottom: 200px; /* This creates the extra length after the button */
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Ensure the button has breathing room */
+#startQuiz {
+    margin-top: 80px !important;
+    margin-bottom: 40px !important;
+}
+
 #module-3-content-wrapper #module4_map_content {
     /* ... existing styles ... */
     max-width: 1200px;
