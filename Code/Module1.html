@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Story</title>
+    <link rel="stylesheet" href="../Code/style.css">
+    
+    <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+</head>
+
+<body id="main_body" style="background-color: #ffffff;">
+<div id="vertical-nav-menu">
+  <div class="nav-item-wrapper">
+    <a href="#mainContent" class="nav-dot" data-chapter-name="Chapter 1">
+      <span class="hover-text">Chapter 1</span>
+      <div class="dot"></div>
+    </a>
+    <div class="dot-connector"></div> 
+  </div>
+
+  <div class="nav-item-wrapper">
+    <a href="#nextSection" class="nav-dot" data-chapter-name="Chapter 2">
+      <span class="hover-text">Chapter 2</span>
+      <div class="dot"></div>
+    </a>
+    <!-- Optional: add another connector if more dots follow -->
+    <div class="dot-connector"></div>
+  </div>
+
+  <div class="nav-item-wrapper">
+        <a href="#nextSection3" class="nav-dot" data-chapter-name="Chapter 3">
+            <span class="hover-text">Chapter 3</span>
+            <div class="dot"></div>
+        </a>
+    </div>
+</div>
+    <section id="mainContent" class="hero_section">
+        <div class="hero_overlay">
+            <h1 class="main_text_color" style="font-size: 100px;">In 2024, food waste across <br> Asia added up to <br>
+                <span id="wasteCount">0</span> tons.
+            </h1>
+        </div>
+        <img id="sarawak_map" src="../asset/background_landfill.png" alt="Landfill background">
+    </section>
+    <div class="text_pie_chart">
+        <div class="fade_in_pie_chart" id="organicPieChart">
+            <img src="../asset/explain_1.png">
+        </div>
+        <div class="explain_pie_chart">
+           <p class="explaination">That is not just a statistic.<br>It shows meals lost, resources drained and communities left behind.</p>
+        </div>
+    </div>
+    <div class="fade-in-text">
+        <p class="main_text_color" style="font-size: 28px;margin-left:-35px;">
+            To understand this better, let us explore how food waste looks across Asia. <br>
+            Where do the biggest totals appear and what patterns can we find? <br>
+            The map below begins to reveal the hidden patterns.
+        </p>
+    </div>
+    <div id="vizContainer_Map" style="width: 100%; height: 700px; margin-left: 220px; max-width: 1080px;"></div>
+    <div class="fade-in-text" style="width: 70%; margin: 0 auto; text-align: justify; font-size: 28px;">
+        <p class="main_text_color" style="text-align: center;">The map reveals how food waste is spread across Asia, with some countries showing massive totals while others contribute smaller but still significant amounts.</p>
+    </div>
+    <div class="fade-in-trigger">
+        <p class="fade-in-line" style="margin-top: -50px;">These differences remind us, food waste is not just about where it happens...</p>
+    </div>
+    <div class="fade-trigger">
+        <p class="fade-line" style="margin-top: -50px; margin-bottom: -50px;">but also about what kinds of food are being lost...</p>
+    </div>
+    <section class="scroll-lock-wrapper">
+        <div class="scroll-lock-inner">
+            <div class="background-layer">
+                <div class="background-image"></div>
+                <div class="text-overlay"></div>
+            </div>
+            <div class="scroll-content">
+                <p class="scroll-fade">So, let us explore...</p>
+                <br>
+                <p class="scroll-fade" style='font-size: 50px;'>Which foods are wasted the most in Asia?</p>
+            </div>
+        </div>
+    </section>
+    <div class="fade-in-text" style="width: 70%; margin: 0 auto; text-align: center; font-size: 28px;">
+        <p class="main_text_color" style="font-size: 28px;">
+           The treemap below shows the everyday items: vegetables, cereals, fruits and even rice that disappear in huge amounts each year.
+        </p>
+        </div>
+    <div id="vizContainer_Treemap" style="width: 100%; height: 700px; margin: 50px auto; max-width: 1080px;"></div>
+    <div class="fade-in-text" style="width: 70%; margin: 0 auto; text-align: center; font-size: 28px;">
+        <p class="main_text_color" style="font-size: 28px;">
+            These are not just numbers... <br>
+            They are the foods we rely on every day.
+        </p>
+    </div>
+    <section class="scroll-lock-wrapper">
+        <div class="scroll-lock-inner">
+            <div class="background-layer">
+                <div class="background-image-2"></div>
+                <div class="text-overlay"></div>
+            </div>
+            <div class="scroll-content">
+                <p class="scroll-fade-2" style="font-size: 80px; margin-left: 500px;color: black;">However, <br></p>
+                <p class="scroll-fade-2" style='font-size: 50px;margin-left: 850px;color: black;'> when seen through the global lens, <br> food waste takes on different shapes across sectors.</p>
+            </div>
+        </div>
+    </section>
+    <div class="fade-in-text" style="width: 70%; margin: 0 auto; text-align: center; font-size: 28px;">
+        <p class="main_text_color" style="font-size: 28px;">
+            Let us have a closer look at the distribution to reveal where the problem truly lies.
+        </p>
+    </div>
+    <div id="vizContainer_LineChart" style="width: 100%; height: 700px; margin: 0 auto; max-width: 1080px;"></div>
+    <div class="fade-in-text" style="width: 70%; margin: 0 auto; text-align: center; font-size: 28px;">
+        <p class="main_text_color" style="font-size: 28px;">Globally, households are the biggest source of food waste, far more than restaurants or retail. This reminds us, the issue is not only about supply chains, it begins in our own kitchens...</p>
+    </div>
+    <button id="loadModule2" style=" padding: 12px 22px; font-size: 18px; background:#69b3a2; color: #111; border:none; border-radius:6px; cursor:pointer; margin: 40px auto; display:block;"> Chapter 2 </button>
+    <!-- Appear module 2 -->
+    <div id="nextSection"></div>
+   <script>
+    // --- FLAG/STATE MANAGEMENT ---
+    let sectionLoaded = false; // For Module 2
+    let module3Loaded = false; // For Module 3
+    
+    gsap.registerPlugin(ScrollTrigger);
+
+    // --- NAVIGATION HANDLER ---
+    function handleNavigation(targetId) {
+    
+    // FIX: Add '#' prefix for querySelector if it's missing
+    const targetSelector = targetId.startsWith('#') ? targetId : '#' + targetId; 
+
+    const targetElement = document.querySelector(targetSelector);
+
+    if (targetId === 'nextSection') {
+        // If target is Module 2 (dynamic), load it if needed.
+        if (!sectionLoaded) {
+            loadNextSection();
+        } else if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    } else if (targetId === 'nextSection3') {
+        // If target is Module 3 (dynamic), load it if needed.
+        loadChapter3(); 
+    } else if (targetElement) {
+        // FIX: Handle static targets (like #mainContent, Module 1)
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+    
+    // --- UTILITIES (animateNumber, waitForContentToSettle - Existing logic retained) ---
+
+    function animateNumber(id, start, end, duration) {
+        // (Existing animateNumber logic)
+        const element = document.getElementById(id);
+        const range = end - start;
+        let current = start;
+        const increment = range / (duration / 10);
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= end) {
+                current = end;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current).toLocaleString();
+        }, 10);
+    }
+
+    function waitForContentToSettle(container, timeout = 3000) {
+        // (Existing waitForContentToSettle logic)
+        return new Promise((resolve) => {
+            const imgs = Array.from(container.querySelectorAll('img'));
+            const iframes = Array.from(container.querySelectorAll('iframe'));
+            const resources = imgs.concat(iframes);
+
+            if (resources.length === 0) {
+                requestAnimationFrame(() => requestAnimationFrame(resolve));
+                return;
+            }
+
+            let settled = false;
+            let remaining = resources.length;
+
+            const done = () => {
+                if (settled) return;
+                remaining--;
+                if (remaining <= 0) {
+                    settled = true;
+                    resolve();
+                }
+            };
+
+            resources.forEach(r => {
+                if (r.tagName.toLowerCase() === 'img') {
+                    if (r.complete) return done();
+                    r.addEventListener('load', done, { once: true });
+                    r.addEventListener('error', done, { once: true });
+                } else if (r.tagName.toLowerCase() === 'iframe') {
+                    r.addEventListener('load', done, { once: true });
+                    r.addEventListener('error', done, { once: true });
+                } else {
+                    done();
+                }
+            });
+
+            // fallback timeout
+            setTimeout(() => {
+                if (!settled) {
+                    settled = true;
+                    resolve();
+                }
+            }, timeout);
+        });
+    }
+
+function initModule1ScrollFades() {
+    const scrollWrapper1 = document.querySelector('.scroll-lock-wrapper');
+    
+    if (scrollWrapper1) {
+        const fadeElements = scrollWrapper1.querySelectorAll(".scroll-fade");
+        
+        // 1. Set initial hidden state using GSAP (Opacity 0, slightly down)
+        gsap.set(fadeElements, { opacity: 0, y: 20, color: "white" });
+
+        const scrollTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: scrollWrapper1,
+                start: "top top",      // Pin starts when the top of the section hits the top of the viewport
+                end: "+=250%",         // Animation duration over 250% of wrapper height
+                scrub: true,           // Link animation progress to scrollbar
+                // markers: true,      // Uncomment this line for debugging scroll triggers
+            }
+        });
+
+        // 2. Animate the elements sequentially within the timeline
+        scrollTimeline
+            // Fade in the first line
+            .to(fadeElements[0], { opacity: 1, y: 0, duration: 1 }, 0.5) 
+            
+            // Fade in the second line (which is inside a p tag with an inline style for font-size)
+            .to(fadeElements[1], { opacity: 1, y: 0, duration: 1 }, 1.5) 
+            
+            // Optional: Animate the overlay opacity as the user scrolls
+            .to(scrollWrapper1.querySelector('.background-layer .text-overlay'), { opacity: 0.8, duration: 1 }, 0); 
+    }
+}
+
+
+    // --- OBSERVERS (UPDATED for Module 3 classes) ---
+    function initModule2Observers(section) {
+        if (!section) return;
+
+        // FIX: Target Module 2 classes, Module 3 narrative classes, and headings/titles
+        const fadeSections = section.querySelectorAll(
+            ".fade_text_TLPPM, .module3_p_text, #title_module_3, .fade-text, h1, h3, h4"
+        ); 
+        
+        if (fadeSections.length === 0) {
+            console.log("No fading elements found in the new section.");
+            return;
+        }
+
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible"); 
+                    obs.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.7 });
+
+        fadeSections.forEach(fadeSection => {
+            obs.observe(fadeSection);
+        });
+        
+        console.log(`Initialized observer for ${fadeSections.length} new text elements.`);
+    }
+
+    function initPieChartObserver() {
+    const pieChartElement = document.getElementById('organicPieChart');
+    if (!pieChartElement) return;
+
+    const pieObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Assuming your CSS uses 'is-visible' or 'visible' to show it
+                entry.target.classList.add('is-visible'); 
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 }); 
+
+    pieObserver.observe(pieChartElement);
+}
+
+    // --- DYNAMIC LOADER FOR MODULE 2 ---
+    function loadNextSection() {
+        if (sectionLoaded) return;
+        sectionLoaded = true;
+        console.log("Fetching Module 2...");
+
+        const nextSection = document.getElementById('nextSection');
+        
+        (async () => {
+            try {
+                const response = await fetch('Module2.html');
+                if (!response.ok) throw new Error("Network response was not ok");
+                const html = await response.text();
+
+                nextSection.innerHTML = html;
+                nextSection.style.opacity = 0;
+                nextSection.style.transition = 'opacity 1s ease-out';
+
+                initModule2Observers(nextSection);
+                initModule2Charts();
+                initModule2GSAP();
+
+                await waitForContentToSettle(nextSection, 3000);
+
+                requestAnimationFrame(() => {
+                    if (window.ScrollTrigger) {
+                        ScrollTrigger.refresh();
+                    }
+                    nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    nextSection.style.opacity = 1;
+                    console.log("Module 2 HTML injected, scrolled, and faded in.");
+                });
+            } catch (err) {
+                console.error('Failed to load next section:', err);
+                sectionLoaded = false;
+            }
+        })();
+    }
+
+    // --- DYNAMIC LOADER FOR MODULE 3 ---
+    function loadChapter3() {
+        if (module3Loaded) {
+            document.getElementById('nextSection3').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+        }
+        module3Loaded = true;
+        console.log("Fetching Module 3 Content...");
+
+        const nextSection = document.getElementById('nextSection');
+        
+        // Dynamically create the container for Module 3 content after Module 2
+        const newModule3Container = document.createElement('div');
+        newModule3Container.id = 'nextSection3';
+        nextSection.parentNode.insertBefore(newModule3Container, nextSection.nextSibling);
+
+        (async () => {
+            try {
+                const response = await fetch('Module3.html'); 
+                if (!response.ok) throw new Error("Network response was not ok");
+                const html = await response.text();
+
+                newModule3Container.innerHTML = html;
+                newModule3Container.style.opacity = 0;
+                newModule3Container.style.transition = 'opacity 1s ease-out';
+
+                initModule2Observers(newModule3Container); // Reuse observer for text fade-in
+                initModule3ChartsMaster(); // Master initializer for all D3 charts
+
+                await waitForContentToSettle(newModule3Container, 4000);
+
+                requestAnimationFrame(() => {
+                    if (window.ScrollTrigger) {
+                        ScrollTrigger.refresh();
+                    }
+                    newModule3Container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    newModule3Container.style.opacity = 1;
+                    console.log("Module 3 HTML injected, charts initialized, and faded in.");
+                });
+            } catch (err) {
+                console.error('Failed to load Module 3:', err);
+                module3Loaded = false;
+            }
+        })();
+    }
+
+    // --- MODULE 1 and 2 CHART INITIALIZERS (Existing) ---
+    
+    function initModule1Charts() { /* ... existing tableau chart logic ... */ 
+        console.log("Loading Module 1 Charts...");
+        const mapDiv = document.getElementById("vizContainer_Map");
+        const mapUrl = "https://public.tableau.com/shared/X4SNFR9FY?:display_count=n&:origin=viz_share_link";
+        if(mapDiv) new tableau.Viz(mapDiv, mapUrl, { width: "100%", height: "700px", hideTabs: true });
+
+        const treeDiv = document.getElementById("vizContainer_Treemap");
+        const treeUrl = "https://public.tableau.com/views/Treemapversion1/Sheet1";
+        if(treeDiv) new tableau.Viz(treeDiv, treeUrl, { width: "100%", height: "700px", hideTabs: true });
+
+        const lineDiv = document.getElementById("vizContainer_LineChart");
+        const lineUrl = "https://public.tableau.com/views/LineChart1-Global/Linechart-1Global";
+        if(lineDiv) new tableau.Viz(lineDiv, lineUrl, { width: "100%", height: "700px", hideTabs: true });
+    }
+    
+    function initModule2Charts() { /* ... existing tableau chart logic ... */ 
+        console.log("Loading Module 2 Charts...");
+        const vizDiv1 = document.getElementById("viz1_container");
+       /* const url1 = "https://public.tableau.com/views/Module2-barchart/Dashboard1";*/
+        const url1 = "https://public.tableau.com/views/FactorsDrivingFoodWasteModule2barchartchart/Sheet2?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+        if (vizDiv1 && typeof tableau !== 'undefined') new tableau.Viz(vizDiv1, url1, { width: "100%", height: "700px", hideTabs: true });
+
+        const vizDiv2 = document.getElementById("viz2_container");
+        const url2 = "https://public.tableau.com/views/Module2-PieChartv1/Module2-pieMalaysiaConsumerBehaviour?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+        if (vizDiv2 && typeof tableau !== 'undefined') new tableau.Viz(vizDiv2, url2, { width: "100%", height: "700px", hideTabs: true });
+
+        const vizDiv3 = document.getElementById("viz3_container");
+        const url3 = "https://public.tableau.com/views/Module_2-Malaysiaconsumerbehaviourpiechart1/Sheet1";
+        if (vizDiv3 && typeof tableau !== 'undefined') new tableau.Viz(vizDiv3, url3, { width: "100%", height: "700px", hideTabs: true });
+    }
+    
+    function initModule2GSAP() { /* ... existing gsap logic ... */ 
+        console.log("Initializing Module 2 GSAP...");
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+            console.warn("GSAP or ScrollTrigger not available.");
+            return;
+        }
+        gsap.registerPlugin(ScrollTrigger);
+        
+        const wrapper1 = document.getElementById("scroll-wrapper-1");
+        if (wrapper1) {
+            const tl1 = gsap.timeline({
+                scrollTrigger: { trigger: wrapper1, start: "top top", end: "+=300%", pin: true, scrub: 1 }
+            });
+            tl1.to("#scroll-wrapper-1 .text-line", { backgroundPosition: "0% 0", ease: "none", stagger: 0.5, duration: 1 });
+            console.log("GSAP Timeline 1 Initialized.");
+        }
+
+        const wrapper2 = document.getElementById("scroll-wrapper-2");
+        if (wrapper2) {
+            const tl2 = gsap.timeline({
+                scrollTrigger: { trigger: wrapper2, start: "top top", end: "+=300%", pin: true, scrub: 1 }
+            });
+            tl2.to("#scroll-wrapper-2 .text-line", { backgroundPosition: "0% 0", ease: "none", stagger: 0.5, duration: 1 });
+            console.log("GSAP Timeline 2 Initialized.");
+        }
+    }
+    
+    // --- CONSOLIDATED D3 DATA (FOR MODULE 3) ---
+    const PLACEHOLDER_IMG_SRC = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+    const foodWasteData = [
+        {"Country": "Afghanistan", "Region": "South Asia", "Year": 2021, "TotalFoodWastePerYear": 3109153, "CanFeedHowManyPeople": 10229},
+        {"Country": "Afghanistan", "Region": "South Asia", "Year": 2024, "TotalFoodWastePerYear": 5229654, "CanFeedHowManyPeople": 17206},
+        {"Country": "Korea", "Region": "East Asia", "Year": 2021, "TotalFoodWastePerYear": 3658024, "CanFeedHowManyPeople": 12035},
+        {"Country": "Korea", "Region": "East Asia", "Year": 2024, "TotalFoodWastePerYear": 4921086, "CanFeedHowManyPeople": 16190},
+        {"Country": "Myanmar", "Region": "Southeast Asia", "Year": 2021, "TotalFoodWastePerYear": 4666125, "CanFeedHowManyPeople": 15352},
+        {"Country": "Myanmar", "Region": "Southeast Asia", "Year": 2024, "TotalFoodWastePerYear": 4221946, "CanFeedHowManyPeople": 13890},
+        {"Country": "Cambodia", "Region": "Southeast Asia", "Year": 2021, "TotalFoodWastePerYear": 1423397, "CanFeedHowManyPeople": 4683},
+        {"Country": "Cambodia", "Region": "Southeast Asia", "Year": 2024, "TotalFoodWastePerYear": 1419831, "CanFeedHowManyPeople": 4671},
+        {"Country": "Tajikistan", "Region": "Central Asia", "Year": 2021, "TotalFoodWastePerYear": 906209, "CanFeedHowManyPeople": 2981},
+        {"Country": "Tajikistan", "Region": "Central Asia", "Year": 2024, "TotalFoodWastePerYear": 852861, "CanFeedHowManyPeople": 2806},
+        {"Country": "Malaysia", "Region": "Southeast Asia", "Year": 2021, "TotalFoodWastePerYear": 2921577, "CanFeedHowManyPeople": 9612},
+        {"Country": "Malaysia", "Region": "Southeast Asia", "Year": 2024, "TotalFoodWastePerYear": 2754808, "CanFeedHowManyPeople": 9063}
+    ];
+
+    const flagMap = {
+        "Afghanistan": "../asset/flags/afg.png", 
+        "Korea": "../asset/flags/kor.png",
+        "Myanmar": "../asset/flags/mmr.png",
+        "Cambodia": "../asset/flags/com.png",
+        "Tajikistan": "../asset/flags/tjk.png",
+        "Malaysia": "../asset/flags/mys.png"
+    };
+
+    const stuntingData = [
+        {"Country": "Afghanistan", "Region": "South Asia", "Year": "1998-2002", "ChildStunting": 0.555, "SeverityScale": "Very high"},
+        {"Country": "Afghanistan", "Region": "South Asia", "Year": "2006-2010", "ChildStunting": 0.478, "SeverityScale": "Very high"},
+        {"Country": "Afghanistan", "Region": "South Asia", "Year": "2014-2018", "ChildStunting": 0.419, "SeverityScale": "Very high"},
+        {"Country": "Afghanistan", "Region": "South Asia", "Year": "2020-2024", "ChildStunting": 0.420, "SeverityScale": "Very high"},
+        {"Country": "Korea", "Region": "East Asia", "Year": "1998-2002", "ChildStunting": 0.525, "SeverityScale": "Very high"},
+        {"Country": "Korea", "Region": "East Asia", "Year": "2006-2010", "ChildStunting": 0.338, "SeverityScale": "High"},
+        {"Country": "Korea", "Region": "East Asia", "Year": "2014-2018", "ChildStunting": 0.214, "SeverityScale": "Medium"},
+        {"Country": "Korea", "Region": "East Asia", "Year": "2020-2024", "ChildStunting": 0.166, "SeverityScale": "Low"},
+        {"Country": "Myanmar", "Region": "Southeast Asia", "Year": "1998-2002", "ChildStunting": 0.459, "SeverityScale": "Very high"},
+        {"Country": "Myanmar", "Region": "Southeast Asia", "Year": "2006-2010", "ChildStunting": 0.355, "SeverityScale": "High"},
+        {"Country": "Myanmar", "Region": "Southeast Asia", "Year": "2014-2018", "ChildStunting": 0.286, "SeverityScale": "Medium"},
+        {"Country": "Myanmar", "Region": "Southeast Asia", "Year": "2020-2024", "ChildStunting": 0.245, "SeverityScale": "Medium"},
+        {"Country": "Cambodia", "Region": "Southeast Asia", "Year": "1998-2002", "ChildStunting": 0.506, "SeverityScale": "Very high"},
+        {"Country": "Cambodia", "Region": "Southeast Asia", "Year": "2006-2010", "ChildStunting": 0.408, "SeverityScale": "Very high"},
+        {"Country": "Cambodia", "Region": "Southeast Asia", "Year": "2014-2018", "ChildStunting": 0.277, "SeverityScale": "Medium"},
+        {"Country": "Cambodia", "Region": "Southeast Asia", "Year": "2020-2024", "ChildStunting": 0.220, "SeverityScale": "Medium"},
+        {"Country": "Tajikistan", "Region": "Central Asia", "Year": "1998-2002", "ChildStunting": 0.413, "SeverityScale": "Very high"},
+        {"Country": "Tajikistan", "Region": "Central Asia", "Year": "2006-2010", "ChildStunting": 0.320, "SeverityScale": "High"},
+        {"Country": "Tajikistan", "Region": "Central Asia", "Year": "2014-2018", "ChildStunting": 0.198, "SeverityScale": "Low"},
+        {"Country": "Tajikistan", "Region": "Central Asia", "Year": "2020-2024", "ChildStunting": 0.131, "SeverityScale": "Low"},
+        {"Country": "Malaysia", "Region": "Southeast Asia", "Year": "1998-2002", "ChildStunting": 0.193, "SeverityScale": "Low"},
+        {"Country": "Malaysia", "Region": "Southeast Asia", "Year": "2006-2010", "ChildStunting": 0.180, "SeverityScale": "Low"},
+        {"Country": "Malaysia", "Region": "Southeast Asia", "Year": "2014-2018", "ChildStunting": 0.200, "SeverityScale": "Medium"},
+        {"Country": "Malaysia", "Region": "Southeast Asia", "Year": "2020-2024", "ChildStunting": 0.243, "SeverityScale": "Medium"}
+    ];
+
+    const severityColors = {
+        "Very high": "#cc3333", "High": "#cc6600", "Medium": "#999933", "Low": "#339933", "Not Selected Country": "#666" 
+    };
+
+    const rawData = [
+        {"Year": 2005, "Region": "Central Asia", "Value": 8.2},
+        {"Year": 2010, "Region": "Central Asia", "Value": 4.1},
+        {"Year": 2015, "Region": "Central Asia", "Value": 2.7},
+        {"Year": 2017, "Region": "Central Asia", "Value": 2.4},
+        {"Year": 2018, "Region": "Central Asia", "Value": 2.1},
+        {"Year": 2019, "Region": "Central Asia", "Value": 1.9},
+        {"Year": 2020, "Region": "Central Asia", "Value": 2.4},
+        {"Year": 2021, "Region": "Central Asia", "Value": 2.5},
+        {"Year": 2022, "Region": "Central Asia", "Value": 2.4},
+        {"Year": 2023, "Region": "Central Asia", "Value": 2.3},
+        {"Year": 2005, "Region": "Eastern Asia", "Value": 105.4},
+        {"Year": 2010, "Region": "Eastern Asia", "Value": 42.8},
+        {"Year": 2005, "Region": "South-eastern Asia", "Value": 95.7},
+        {"Year": 2010, "Region": "South-eastern Asia", "Value": 69.8},
+        {"Year": 2015, "Region": "South-eastern Asia", "Value": 49.5},
+        {"Year": 2017, "Region": "South-eastern Asia", "Value": 38.5},
+        {"Year": 2018, "Region": "South-eastern Asia", "Value": 37.7},
+        {"Year": 2019, "Region": "South-eastern Asia", "Value": 36.6},
+        {"Year": 2020, "Region": "South-eastern Asia", "Value": 37.3},
+        {"Year": 2021, "Region": "South-eastern Asia", "Value": 39.0},
+        {"Year": 2022, "Region": "South-eastern Asia", "Value": 41.6},
+        {"Year": 2023, "Region": "South-eastern Asia", "Value": 41.7},
+        {"Year": 2005, "Region": "Southern Asia", "Value": 325.2},
+        {"Year": 2010, "Region": "Southern Asia", "Value": 258.4},
+        {"Year": 2015, "Region": "Southern Asia", "Value": 236.1},
+        {"Year": 2017, "Region": "Southern Asia", "Value": 194.6},
+        {"Year": 2018, "Region": "Southern Asia", "Value": 197.3},
+        {"Year": 2019, "Region": "Southern Asia", "Value": 216.9},
+        {"Year": 2020, "Region": "Southern Asia", "Value": 268.3},
+        {"Year": 2021, "Region": "Southern Asia", "Value": 288.6},
+        {"Year": 2022, "Region": "Southern Asia", "Value": 284.9},
+        {"Year": 2023, "Region": "Southern Asia", "Value": 280.9},
+        {"Year": 2005, "Region": "Western Asia", "Value": 32.9},
+        {"Year": 2010, "Region": "Western Asia", "Value": 29.0},
+        {"Year": 2015, "Region": "Western Asia", "Value": 37.3},
+        {"Year": 2017, "Region": "Western Asia", "Value": 42.7},
+        {"Year": 2018, "Region": "Western Asia", "Value": 44.6},
+        {"Year": 2019, "Region": "Western Asia", "Value": 44.9},
+        {"Year": 2020, "Region": "Western Asia", "Value": 47.2},
+        {"Year": 2021, "Region": "Western Asia", "Value": 51.3},
+        {"Year": 2022, "Region": "Western Asia", "Value": 54.8},
+        {"Year": 2023, "Region": "Western Asia", "Value": 57.8}
+    ].filter(d => d.Value !== "No Selected");
+
+
+    // --- D3 CHART INITIALIZERS ---
+
+    function initModule3ChartsMaster() {
+        if (typeof d3 === 'undefined') {
+            console.error("D3 library not loaded. Cannot initialize Module 3 charts.");
+            return;
+        }
+        initModule3Part1IconChart();
+        initModule3Part2MapChart();
+        initModule3Part3TimelineChart();
+    }
+    
+    // 1. Icon Chart (Part 1)
+    // 1. Icon Chart (Part 1)
+function initModule3Part1IconChart() {
+    console.log("Initializing Module 3 D3 Icon Chart...");
+
+    const countries = [...new Set(foodWasteData.map(d => d.Country))].sort();
+    const years = [...new Set(foodWasteData.map(d => d.Year))].sort((a, b) => b - a);
+
+    const countrySelect = d3.select("#country-select");
+    const yearSelect = d3.select("#year-select");
+    
+    countrySelect.html("");
+    yearSelect.html("");
+
+    // --- FIX APPLIED HERE: Remove "Select Country" option ---
+    countrySelect.selectAll("option")
+        .data(countries) // Bind data directly without the placeholder string
+        .enter()
+        .append("option")
+        .text(d => d)
+        .attr("value", d => d);
+
+    // --- FIX APPLIED HERE: Remove "Select Year" option ---
+    yearSelect.selectAll("option")
+        .data(years) // Bind data directly without the placeholder string
+        .enter()
+        .append("option")
+        .text(d => d)
+        .attr("value", d => d);
+
+    // Set Default Selections (Ensures the chart loads data immediately)
+    countrySelect.property("value", "Afghanistan");
+    yearSelect.property("value", 2024);
+
+    const svg = d3.select("#plate-icon-chart");
+    const width = 510; 
+    const height = 410; 
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+    function updateChart() {
+        const selectedCountry = countrySelect.property("value");
+        const selectedYear = +yearSelect.property("value");
+
+        const filteredData = foodWasteData.find(d => 
+            d.Country === selectedCountry && d.Year === selectedYear
+        );
+
+        if (!filteredData) {
+            d3.select("#no-data-message").style("display", "block");
+            svg.selectAll("*").remove(); 
+            d3.select("#country-flag").attr("src", PLACEHOLDER_IMG_SRC); 
+            d3.select("#country-name").text("Select a Country");
+            d3.select("#total-waste").text("N/A");
+            d3.select("#people-fed").text("N/A");
+            return;
+        }
+
+        d3.select("#no-data-message").style("display", "none");
+
+        const mealsInMillions = filteredData.CanFeedHowManyPeople / 1000; 
+        const numIcons = Math.ceil(mealsInMillions); 
+        const maxIcons = 20; 
+
+        const iconArray = d3.range(maxIcons).map(i => ({
+            id: i,
+            isFilled: i < numIcons
+        }));
+
+        d3.select("#country-flag").attr("src", flagMap[selectedCountry] || PLACEHOLDER_IMG_SRC);
+        d3.select("#country-name").text(selectedCountry);
+        d3.select("#total-waste").text(filteredData.TotalFoodWastePerYear.toLocaleString());
+        d3.select("#people-fed").text(filteredData.CanFeedHowManyPeople.toLocaleString() + " thousand meals");
+
+        const iconSize = 60;
+        const iconPadding = 30;
+        const iconsPerRow = 5;
+        
+        const icons = svg.selectAll("g")
+            .data(iconArray, d => d.id);
+
+        icons.exit().remove();
+        
+        const iconGroup = icons.enter()
+            .append("g")
+            .attr("transform", d => {
+                const row = Math.floor(d.id / iconsPerRow);
+                const col = d.id % iconsPerRow;
+                const x = col * (iconSize + iconPadding) + 50;
+                const y = row * (iconSize + iconPadding) + 50;
+                return `translate(${x}, ${y})`;
+            });
+
+        iconGroup.append("circle") 
+            .attr("r", iconSize / 2) 
+            .attr("cx", iconSize / 2) 
+            .attr("cy", iconSize / 2) 
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 0.5);
+
+        const mergedIcons = iconGroup.merge(icons);
+
+        mergedIcons.transition()
+            .duration(500)
+            .attr("transform", d => {
+                const row = Math.floor(d.id / iconsPerRow);
+                const col = d.id % iconsPerRow;
+                const x = col * (iconSize + iconPadding) + 50;
+                const y = row * (iconSize + iconPadding) + 50;
+                return `translate(${x}, ${y})`;
+            });
+
+        mergedIcons.select("circle") 
+            .transition()
+            .duration(500)
+            .attr("fill", d => d.isFilled ? "#4CAF50" : "#333");
+    }
+
+    countrySelect.on("change", updateChart);
+    yearSelect.on("change", updateChart);
+    
+    updateChart();
+}
+
+    // 2. Map Chart (Part 2)
+   // 2. Map Chart (Part 2)
+function initModule3Part2MapChart() {
+    console.log("Initializing Module 3 D3 Map Chart...");
+    
+    const years = [...new Set(stuntingData.map(d => d.Year))].sort().reverse(); 
+    const dataByYear = d3.group(stuntingData, d => d.Year);
+    
+    const margin = { top: 10, right: 10, bottom: 10, left: 10 },
+        width = 900 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
+    const svg = d3.select("#map-visualization")
+        .html("") // Clear map visualization div
+        .append("svg")
+        .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+    
+    const projection = d3.geoMercator()
+        .scale(550) 
+        .center([100, 20]) 
+        .translate([width / 2, height / 2]);
+
+    const path = d3.geoPath().projection(projection);
+
+    // FIX 1: Strict Tooltip Removal and Creation (Once per chart initialization)
+    d3.select("body").selectAll(".map-tooltip").remove();
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip map-tooltip") // Use a specific class for cleanup
+        .style("opacity", 0);
+
+    const yearSelect = d3.select("#year-select-map");
+    yearSelect.html("");
+
+    yearSelect.selectAll("option")
+        .data(years) 
+        .enter()
+        .append("option")
+        .text(d => d)
+        .attr("value", d => d);
+
+    function updateMap(selectedYear) {
+        const currentYearData = dataByYear.get(selectedYear) || [];
+        const severityLookup = new Map(currentYearData.map(d => [d.Country, d]));
+
+        // --- FIX 2: Interactivity Logic Moved OUT of transition's .on("end") ---
+
+        // Selection of paths for both transition (color) and event attachment
+        const mapPaths = svg.selectAll(".country-path");
+
+        // 1. Apply color transition
+        mapPaths
+            .transition()
+            .duration(500)
+            .attr("fill", d => {
+                const countryName = d.properties.name; 
+                const data = severityLookup.get(countryName);
+                return data ? severityColors[data.SeverityScale] : severityColors["No Selected"];
+            });
+        
+        // 2. Attach (or re-attach) mouse events IMMEDIATELY to the path elements
+        mapPaths
+            .on("mouseover", function(event, d) {
+                const countryName = d.properties.name;
+                const data = severityLookup.get(countryName);
+                
+                d3.select(this).attr("stroke-width", "2.5px");
+
+                tooltip.transition().duration(200).style("opacity", 0.9);
+                
+                if (data) {
+                    tooltip.html(`
+                    <b>${data.Country}</b> (${data.Year})<br>
+                        Rate: <b>${d3.format(".1%")(data.ChildStunting)}</b><br>
+                        Severity: <b>${data.SeverityScale}</b>
+                    `)
+                } else {
+                    tooltip.html(`<b>${countryName}</b><br>Not Selected Country`);
+                }
+                
+                tooltip.style("left", (event.pageX + 10) + "px")
+                       .style("top", (event.pageY - 28) + "px");
+
+            })
+            .on("mouseout", function() {
+                tooltip.transition().duration(500).style("opacity", 0);
+                d3.select(this).attr("stroke-width", "1px");
+            });
+    }
+
+    // CRITICAL: Ensure the TopoJSON file path is correct relative to module1.html
+    d3.json("js/countries-50m.json").then(function(topo) {
+        const countries = topojson.feature(topo, topo.objects.countries).features; 
+
+        // Initial drawing of map paths (ONLY RUN ONCE)
+        svg.selectAll("path")
+            .data(countries)
+            .enter()
+            .append("path")
+            .attr("class", "country-path")
+            .attr("d", path)
+            .attr("fill", severityColors["No Selected"]);
+        
+        yearSelect.property("value", years[0]); 
+        updateMap(years[0]); // Initial map update
+
+    }).catch(function(error) {
+        console.error("Error loading TopoJSON file or parsing map data:", error);
+        svg.append("text")
+            .attr("x", width / 2)
+            .attr("y", height / 2)
+            .attr("text-anchor", "middle")
+            .attr("fill", "red")
+            .text("ERROR: Could not load map boundaries. Check GeoJSON file path.");
+    });
+    
+    yearSelect.on("change", function() {
+        updateMap(this.value);
+    });
+}
+
+    // 3. Timeline Chart (Part 3)
+    function initModule3Part3TimelineChart() {
+        console.log("Initializing Module 3 D3 Timeline Chart...");
+
+        const data = rawData.map(d => ({
+            Year: +d.Year,
+            Region: d.Region,
+            Value: d.Value // Already filtered out 'No Data' but keep logic
+        }));
+
+        const dataGroupedByRegion = d3.group(data, d => d.Region);
+        const regions = Array.from(dataGroupedByRegion.keys());
+        
+        const margin = { top: 30, right: 40, bottom: 60, left: 50 },
+    width = 750 - margin.left - margin.right, // Chart area width: 660px
+    height = 450 - margin.top - margin.bottom; // Chart area height: 360px
+
+const svg = d3.select("#timeline-chart-undernourishment")
+    .html("") 
+    .append("svg")
+    .attr("viewBox", `0 0 750 450`) // Total SVG size is 750 wide, 450 high
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+        
+        const xScale = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.Year))
+            .range([0, width]);
+
+        const yScale = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d.Value) * 1.05])
+            .range([height, 0]);
+
+        const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+            .domain(regions);
+            
+        // Draw Axes 
+        svg.append("g")
+            .attr("class", "axis x-axis")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(xScale).tickFormat(d3.format("d")).tickValues(data.map(d => d.Year).filter((v, i, a) => a.indexOf(v) === i))); 
+        
+        svg.append("g")
+            .attr("class", "axis y-axis")
+            .call(d3.axisLeft(yScale).tickFormat(d3.format(".0f")));
+        
+        const lineGenerator = d3.line()
+            .defined(d => d.Value !== null)
+            .x(d => xScale(d.Year))
+            .y(d => yScale(d.Value));
+
+        const tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        const regionGroups = svg.selectAll(".region-group")
+            .data(dataGroupedByRegion)
+            .enter()
+            .append("g")
+            .attr("class", "region-group")
+            .attr("id", d => `group-${d[0].replace(/\s/g, '-')}`); 
+
+        regionGroups.each(function([region, data]) {
+            const regionColor = colorScale(region);
+            const groupId = `group-${region.replace(/\s/g, '-')}`;
+
+            d3.select(this)
+                .append("path")
+                .attr("class", "region-line")
+                .attr("d", lineGenerator(data))
+                .style("stroke", regionColor)
+                .attr("id", `line-${region.replace(/\s/g, '-')}`)
+                .style("fill", "none");
+
+            d3.select(this).selectAll(".data-point")
+                .data(data.filter(d => d.Value !== null))
+                .enter()
+                .append("circle")
+                .attr("class", "data-point")
+                .attr("cx", d => xScale(d.Year))
+                .attr("cy", d => yScale(d.Value))
+                .attr("r", 5)
+                .attr("fill", regionColor)
+                .attr("stroke", "#111")
+                .attr("stroke-width", 1.5)
+                .on("mouseover", function(event, d) {
+                    tooltip.transition().duration(200).style("opacity", 0.9);
+                    tooltip.html(`
+                    <b>${d.Region}</b> (${d.Year})<br>
+                        Undernourished: <b>${d.Value.toFixed(1)}M</b>
+                    `)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+
+                    d3.select(`#line-${region.replace(/\s/g, '-')}`).style("stroke-width", "5px");
+                })
+                .on("mouseout", function() {
+                    tooltip.transition().duration(500).style("opacity", 0);
+                    d3.select(`#line-${region.replace(/\s/g, '-')}`).style("stroke-width", "3px");
+                });
+        });
+
+        const filterControls = d3.select("#region-filter-controls");
+        filterControls.selectAll(".filter-item").remove(); // Clear existing filters
+
+        filterControls.selectAll(".filter-item")
+            .data(regions)
+            .enter()
+            .append("div")
+            .attr("class", "filter-item")
+            .html(d => `
+                <input type="checkbox" id="check-${d.replace(/\s/g, '-')}" checked>
+                <label for="check-${d.replace(/\s/g, '-')}" style="color:${colorScale(d)};">${d}</label>
+            `)
+            .on("change", function(event, d) {
+                const isChecked = d3.select(this).select("input").property("checked");
+                const groupId = `#group-${d.replace(/\s/g, '-')}`;
+                d3.select(groupId).style("display", isChecked ? "block" : "none");
+            });
+    }
+    
+    // --- INITIALIZATION ON LOAD ---
+    document.addEventListener("DOMContentLoaded", function() {
+        initModule1Charts();
+        animateNumber("wasteCount", 0, 343566470, 1000);
+        // FIX: Call the pie chart observer here
+    initPieChartObserver();
+    // FIX: Call the Module 1 scroll-fade initializer here
+    initModule1ScrollFades();
+        // Setup button listener for Module 2
+        const btn = document.getElementById("loadModule2");
+        if (btn) {
+            btn.addEventListener("click", () => {
+                handleNavigation('nextSection');
+            });
+        }
+
+        // Setup the vertical menu listeners
+        const navDots = document.querySelectorAll('#vertical-nav-menu .nav-dot');
+        navDots.forEach(dot => {
+            dot.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                handleNavigation(targetId);
+            });
+        });
+    });
+
+    function startQuizNavigation() {
+    console.log("Redirecting to Quiz Page...");
+    
+    // This is the function that redirects the user to the quiz page.
+    window.location.href = 'Quiz.html'; 
+}
+</script>
+</body>
+</html>

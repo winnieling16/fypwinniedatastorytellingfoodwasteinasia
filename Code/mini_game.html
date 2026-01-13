@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Think Before You Throw</title>
+  <link rel="stylesheet" href="../Code/style.css">
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background-color: #ffffff;
+      font-family: 'Baskerville', sans-serif;
+      display: block; /* changed from flex */
+      overflow-x: hidden;
+      margin: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    body.fade-in{
+      opacity: 1;
+    }
+
+    .game-container {
+  background-image: url('../asset/food_background.jpg'); /* update path as needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* keeps image stuck while content scrolls */
+  padding-top: 25px; /* lowers the content */
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.game-container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.6); /* soft white tint */
+  z-index: 0;
+}
+
+.game-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+    h2 {
+      text-align: center;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .game-container {
+      position: relative;
+      display: block;
+      /* width: 90%;
+      max-width: 900px; */
+      margin: 0 auto;
+      text-align: center;
+    }
+
+
+    .food-items {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .food {
+      width: 200px;
+      height: 180px;
+      cursor: grab;
+      transition: transform 0.3s;
+    }
+
+    .food:hover {
+      transform: scale(1.1);
+    }
+
+    .food_wrapper {
+  position: relative;
+  width: 200px;
+  height: 180px;
+}
+
+.food_label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  padding: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.food_wrapper:hover .food_label {
+  opacity: 1;
+}
+
+
+    .bins {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      margin-top: 20px;
+    }
+
+    .bin {
+      width: 140px;
+      height: 160px;
+      border: 3px dashed #aaa;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-weight: bold;
+      background-color: #fff;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .bin.dragover {
+      background-color: #d7ffd9;
+      transform: scale(1.05);
+    }
+
+    .feedback {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  color: #333;
+  background: #fff7df;
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  min-height: 40px;
+  z-index: 5;
+}
+
+.feedback.visible {
+  opacity: 1;
+}
+
+    #summary {
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      margin-top: 2rem;
+    }
+
+    #summary.visible {
+      opacity: 1;
+      color: black;
+    }
+
+    .summary_wrapper{
+      position: relative;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 1.8rem;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 10;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    
+
+    .overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .overlay:not(.visible){
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .story-section {
+      opacity: 0;
+      transition: opacity 2s ease;
+      background: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 20px;
+    }
+
+    .story-section.visible {
+      opacity: 1;
+    }
+
+    #overlayText {
+  animation: fadeInText 2s ease forwards;
+  text-align: center;
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.highlighted-text {
+  border: 3px solid #333;
+  background-color: #fef3b0;
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: #111;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  max-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.next-btn {
+  opacity: 0;                /* hidden initially */
+  display: none;             /* not shown until JS triggers */
+  transition: opacity 1.5s ease, background-color 0.3s ease;
+  background-color: #4CAF50; /* green */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+
+/* Hover effect */
+.next-btn:hover {
+  background-color: yellow; /* darker green */
+  color: black;
+}
+
+/* Overlay for ink drop */
+.ink-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: black; /* ink color */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 1s ease-out, height 1s ease-out;
+}
+
+  </style>
+</head>
+<body>
+<!-- Add your existing audio_1 -->
+<audio id="audio_1" src="../audio/audio_1.mp3" preload="auto"></audio>
+
+  <section class="game-container">
+    <h2 class="highlighted-text">Think Before You Throw</h2>
+<p class="highlighted-text">You’ve just finished your meal. What will you do with the leftovers?</p>
+
+    <div class="food-items">
+      <div class="food_wrapper">
+        <img src="../image_mini_game/rice.png" alt="Rice" class="food" draggable="true" data-calories="200" data-name="Rice">
+        <div class="food_label">Rice</div>
+      </div>
+      <div class="food_wrapper">
+        <img src="../image_mini_game/chicken.png" alt="Chicken" class="food" draggable="true" data-calories="250" data-name="Chicken">
+        <div class="food_label">Chicken</div>
+      </div>
+      <div class="food_wrapper">
+        <img src="../image_mini_game/bread.png" alt="Bread" class="food" draggable="true" data-calories="80" data-name="Bread">
+        <div class="food_label">Bread</div>
+      </div>
+      <div class="food_wrapper">
+        <img src="../image_mini_game/veggie.png" alt="Vegetables" class="food" draggable="true" data-calories="50" data-name="Vegetables">
+        <div class="food_label">Vegetables</div>
+      </div>
+    </div>
+
+    <div class="bins">
+      <div id="saveBin" class="bin">🍱 Save for Later</div>
+      <div id="trashBin" class="bin">🗑️ Throw Away</div>
+    </div>
+
+    <div class="summary_wrapper">
+      <div id="feedback" class="feedback"></div>
+      <div id="summary">
+        <h3>Summary</h3>
+        <p id="resultText"></p>
+      </div>
+    </div>
+  </section>
+
+  <div id="overlay" class="overlay"><span id="overlayText"></span></div>
+
+  <audio id="introMusic" src="../audio/audio_1.mp3" preload="auto" loop muted></audio>
+<audio id="overlayMusic" src="../audio/audio_2.mp3" preload="auto" loop></audio>
+<audio id="successAudio" src="../audio/audio_1.mp3"></audio>
+
+
+  <section id="storySection" class="story-section">
+    <h2>What Actually Is Food Waste?</h2>
+    <p style="color: black; font-size: 18px;">
+      Food waste happens when food that is safe and nutritious to eat is thrown away, whether during production, transport or in our homes.
+      <br><br>
+      Every plate left unfinished, every unsold product and every overcooked portion adds up to a global issue.
+      In Asia, millions of tonnes food are lost each year which enough to feed entire populations.
+      <br><br>
+      Let us take a closer look at how food waste happens across the region.
+    </p>
+    <!-- Next button (hidden initially) -->
+  <button id="nextBtn" class="next-btn">Next</button>
+  </section>
+
+</body>
+  <script>
+    window.addEventListener('load', () => {
+      document.body.classList.add('fade-in');
+    });
+
+    const introMusic = document.getElementById('introMusic');
+    introMusic.volume = 0.4;
+    introMusic.play().then(() => {
+      setTimeout(() => {
+        introMusic.muted = false;
+      }, 500);
+    }).catch(() => {
+      document.body.addEventListener('click', () => {
+        introMusic.muted = false;
+        introMusic.volume = 0.4;
+        introMusic.play();
+      }, { once: true });
+    });
+
+    const foods = document.querySelectorAll('.food');
+    const saveBin = document.getElementById('saveBin');
+    const trashBin = document.getElementById('trashBin');
+    const feedback = document.getElementById('feedback');
+    const summary = document.getElementById('summary');
+    const resultText = document.getElementById('resultText');
+    const overlay = document.getElementById('overlay');
+    const overlayText = document.getElementById('overlayText');
+    const storySection = document.getElementById('storySection');
+
+    let totalCaloriesThrown = 0;
+    let processed = 0;
+    let gameResult = 'waste';
+    const totalFoods = foods.length;
+
+    const foodMessages = {
+      Rice: "That could feed a 2-year-old child for one meal.",
+      Chicken: "Enough protein to feed a 5-year-old for lunch.",
+      Bread: "Could fill a small child's stomach at breakfast.",
+      Vegetables: "Still good — could give a child extra vitamins for dinner."
+    };
+
+    foods.forEach(food => {
+      food.addEventListener('dragstart', dragStart);
+    });
+
+    [saveBin, trashBin].forEach(bin => {
+      bin.addEventListener('dragover', dragOver);
+      bin.addEventListener('dragleave', dragLeave);
+      bin.addEventListener('drop', drop);
+    });
+
+    function dragStart(e) {
+      e.dataTransfer.setData('text/plain', e.target.dataset.name);
+      e.dataTransfer.setData('calories', e.target.dataset.calories);
+    }
+
+    function dragOver(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('dragover');
+    }
+
+    function dragLeave(e) {
+      e.currentTarget.classList.remove('dragover');
+    }
+
+    function drop(e) {
+  e.preventDefault();
+  const foodName = e.dataTransfer.getData('text/plain');
+  const calories = parseInt(e.dataTransfer.getData('calories'));
+  e.currentTarget.classList.remove('dragover');
+
+  const foodElement = [...foods].find(f => f.dataset.name === foodName);
+  if (!foodElement || foodElement.classList.contains('done')) return;
+
+  foodElement.classList.add('done');
+  foodElement.style.visibility = 'hidden';
+
+  // ✅ hide the label too
+  const label = foodElement.parentElement.querySelector('.food_label');
+  if(label) label.style.opacity = 0;
+
+  processed++;
+
+  if (e.currentTarget.id === 'trashBin') {
+    totalCaloriesThrown += calories;
+    showFeedback(`You threw away ${foodName}. ${foodMessages[foodName]}`);
+  } else {
+    showFeedback(`You saved ${foodName}! That’s one less meal wasted.`);
+  }
+
+  if (processed === totalFoods) {
+    setTimeout(showSummary, 500);
+  }
+}
+
+
+    function showFeedback(msg) {
+      feedback.textContent = msg;
+      feedback.classList.add('visible');
+      setTimeout(() => feedback.classList.remove('visible'), 5000);
+    }
+
+    function showSummary() {
+      if (totalCaloriesThrown === 0) {
+        resultText.textContent = "Amazing! You saved every bit of food. Nothing went to waste.";
+        gameResult = 'success';
+      } else if (totalCaloriesThrown < 300) {
+        resultText.textContent = "You wasted just a bit — enough to feed one small child.";
+        gameResult = 'waste';
+      } else if (totalCaloriesThrown < 600) {
+        resultText.textContent = "You threw away food that could have fed 2–3 children.";
+        gameResult = 'waste';
+      } else {
+        resultText.textContent = "That’s a lot of food! Enough to feed a whole family for a meal.";
+        gameResult = 'waste';
+      }
+
+      summary.classList.add('visible');
+      setTimeout(showOverlayAndReset, 3500);
+    }
+
+
+  let currentOverlayMusic = null; // Track currently playing overlay music
+
+function showOverlayAndReset() {
+  const overlayMusic = document.getElementById('overlayMusic'); // sad/waste music
+  const introMusic = document.getElementById('introMusic');     // happy/success music
+  const successAudio = document.getElementById('successAudio');
+
+  // Stop any currently playing music
+  if (!overlayMusic.paused) {
+    overlayMusic.pause();
+    overlayMusic.currentTime = 0;
+  }
+  if (!introMusic.paused) {
+    introMusic.pause();
+    introMusic.currentTime = 0;
+  }
+
+  // Set overlay message
+  overlayText.innerHTML = gameResult === 'success'
+    ? "You made a thoughtful choice.<br>Imagine if everyone saved their leftovers — how much waste we could prevent."
+    : "That was just one meal.<br>Now imagine millions of meals wasted every day.";
+
+  // Show overlay
+  overlay.classList.add('visible');
+
+  // 🎵 Play audio based on result
+  if (gameResult === 'success') {
+    introMusic.volume = 0.4;
+    introMusic.play();
+
+    successAudio.currentTime = 0;
+    successAudio.volume = 0.6;
+    successAudio.play();
+
+    currentOverlayMusic = introMusic;
+  } else {
+    overlayMusic.volume = 0.6;
+    overlayMusic.play();
+    currentOverlayMusic = overlayMusic;
+  }
+
+  // Keep overlay visible longer so user can read (e.g., 8 seconds)
+  setTimeout(() => {
+    // Fade out overlay
+    overlay.classList.remove('visible');
+
+    // Enable scrolling
+    document.documentElement.style.overflowY = 'auto';
+    document.body.style.overflowY = 'auto';
+
+    // Scroll smoothly to the story section
+    storySection.scrollIntoView({ behavior: 'smooth' });
+
+    // Reset game items after overlay fades
+    setTimeout(() => {
+      resetGame();
+      storySection.classList.add('visible');
+    }, 500); // delay slightly so scroll happens first
+  }, 8000); // 8 seconds overlay display
+}
+
+function resetGame() {
+  totalCaloriesThrown = 0;
+  processed = 0;
+
+  const foodItemsContainer = document.querySelector('.food-items');
+  const foodWrappers = document.querySelectorAll('.food_wrapper');
+
+foodWrappers.forEach(wrapper => {
+  const food = wrapper.querySelector('.food');
+  const label = wrapper.querySelector('.food_label'); // get the label
+
+  food.style.transform = 'none';
+  food.style.opacity = '1';
+  food.style.pointerEvents = 'auto';
+  food.classList.remove('dragged');
+  food.classList.remove('done');
+  food.style.visibility = 'visible';
+
+  // ✅ reset label hover
+if(label) label.style.removeProperty('opacity');
+
+  foodItemsContainer.appendChild(wrapper);
+});
+
+  document.querySelectorAll('.feedback').forEach(f => f.classList.remove('visible'));
+
+  // Do NOT reset overlay music here! Keep it based on last game result
+}
+
+const nextBtn = document.getElementById('nextBtn');
+let sectionLoaded = false;
+
+// Hide initially
+nextBtn.style.display = 'none';
+nextBtn.style.opacity = 0;
+
+// Show after 5s when storySection is visible
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        nextBtn.style.display = 'inline-block';
+        nextBtn.style.opacity = 1;
+      }, 5000);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+observer.observe(storySection);
+
+/*
+nextBtn.addEventListener('click', () => {
+  // Instead of going straight to module_1.html,
+  // go to ink.html first
+  window.location.href = 'ink_drop.html';
+});
+*/
+
+nextBtn.addEventListener('click', () => {
+  // Instead of going straight to module_1.html,
+  // go to ink.html first
+  window.location.href = 'Module1.html';
+});
+  </script>
+</html>

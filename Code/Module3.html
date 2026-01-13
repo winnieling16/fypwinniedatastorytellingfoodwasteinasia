@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="../Code/module_3.css">
+</head>
+<body>
+<div id="module-3-content-wrapper" style="background-color: #111111;">
+    
+    <div id="module-3-part1-wrapper">
+        <section id="scene3" class="fade-scene" style="background-color: black;">
+            <div class="hunger-bg">
+                <div class="overlay"></div>
+                <div id="title_module_3" class="text-container-module3">
+                    <p class="fade-text">Unseen Reality: Food Waste and Hunger... <br>
+                        <b>Module 3: Hunger</b></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="module3_content_part1" style="background-color: #111; padding: 50px 0;">
+            <h1 style="color: white; text-align: center; margin-bottom: 40px;">
+                Do you ever wonder...<br> 
+                How the waste we discard could nourish those who go hungry?
+            </h1>
+
+            <p class="module3_p_text">Food waste isn’t just a statistic <br>
+                It is a missed opportunity to feed millions.
+            </p>
+            <p class="module3_p_text">Let begins with the six countries in Asia.<br> 
+                See how much food waste they generate<br>
+                and how many meals that could become.</p>
+
+
+            <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 40px;">
+                <label for="country-select" style="color: white;">Country:</label>
+                <select id="country-select" style="padding: 5px;"></select>
+                
+                <label for="year-select" style="color: white;">Year:</label>
+                <select id="year-select" style="padding: 5px;"></select>
+            </div>
+
+            <div id="viz-container" style="display: flex; width: 80%; max-width: 1200px; margin: 0 auto; justify-content: space-around; align-items: center; background-color: #2c2c2c; padding: 40px; border-radius: 10px;">
+                
+                <div style="text-align: center; width: 30%;margin-top: -80px;">
+                    <img id="country-flag" src="" alt="Country Flag" style="width: 100vh; margin-left:-180px; ">
+                    <h3 id="country-name" style="color: white; margin-top: -50px; font-size: 35px;">Select a Country</h3>
+                    
+                    <p class="scale-note">
+                        <span class="legend-circle" style="background-color: #4CAF50;"></span> 
+                        1 Icon = ~ 1 Million Meals
+                    </p>
+                    
+                    <hr style="border-top: 1px solid #444; width: 80%; margin: 15px auto;">
+                    
+                    <p style="color: white; text-align: left; padding-left: 10%;">
+                        <strong style="font-size: 25px;">Total Waste:</strong> <span id="total-waste" style="font-size: 25px;color: yellow;">N/A</span> tons
+                    </p>
+                    <p style="color: white; text-align: left; padding-left: 10%;">
+                        <strong style="font-size: 25px;">Meals Available:</strong> <span id="people-fed" style="font-size: 25px;color: yellow;">N/A</span>
+                    </p>
+                </div>
+
+                <div style="width: 50%; height: 400px; border: 2px solid #555; background-color: #000000; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <svg id="plate-icon-chart" width="100%" height="100%"></svg>
+                    <div id="no-data-message" style="color: #999; font-size: 1.2em; position: absolute; display: block;">Select a country and year to view data.</div>
+                </div>
+
+            </div>
+
+            <div style="width: 80%; max-width: 1200px; margin: 20px auto 0; color: white;">
+                <div style="margin-top: 20px;">
+                    <h4 style="color: #fff; margin-bottom: 10px;">Chart Legend & Full Scale Explanation:</h4>
+                    <p>
+                        <span class="legend-circle" style="background-color: #4CAF50;"></span> 
+                        <b>Filled Icon</b> (Meals generated from food waste)
+                    </p>
+                    <p>
+                        <span class="legend-circle" style="background-color: #333;"></span> 
+                        <b>Unfilled Icon</b> (Total capacity not met)
+                    </p>
+                    <hr style="border-top: 1px solid #555; margin: 15px 0;">
+                    <p>Scale Explanation:</p>
+                    <ul>
+                        <li>The number of meals is calculated by converting the country's annual food waste into meal equivalents.</li>
+                        <li>The chart has a maximum display capacity of <b>20 icons</b>, representing <b>20 million potential meals</b>.</li>
+                        <li>The icons visually show the total number of million meals available for the selected year.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+        <p class="module3_p_text">The chart is only an assumption of how waste could feed people<br>
+        Its purpose is to remind us to care for every piece of food in our hands...</p>
+    </div>
+    
+    <div id="module-3-part2-wrapper" style="background-color: #111; padding: 50px 0;margin-top: -100px;">
+        <section id="module4_map_content" style="background-color: #111;">
+            <p class="module3_p_text">Every wasted food<br>
+            no matter it is a small or big portion is still wasted... <br>
+            Behind those lost meals are </p>
+            <h1 style="color: rgb(255, 255, 201); text-align: center;">children who cannot grow well and whose futures are held back...</h1><br> 
+            <p class="module3_p_text">So, let us dive into the next chart which shows stunting levels across five Asia country,<br>
+            focusing on selected five countries.</p><br>
+            <h1 style="text-align: center; margin-bottom: 20px; color: yellow;">
+                Stunting Severity by Country 
+            </h1>
+
+            <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 30px;">
+                <label for="year-select-map" style="margin-right: 15px; color: white;">Select Year:</label>
+                <select id="year-select-map" style="padding: 8px;"></select>
+            </div>
+
+            <div class="chart-container">
+                <div id="map-visualization"></div>
+            </div>
+
+            <div style="margin-top: 30px; text-align: center; color: white;">
+                <h3>Severity Legend:</h3>
+                <div style="display: inline-flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: #cc3333;"></div> <b>Very High</b> (>= 40%)</div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: #cc6600;"></div> <b>High</b> (30% - 39.9%)</div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: #999933;"></div> <b>Medium</b> (20% - 29.9%)</div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: #339933;"></div> <b>Low</b>(< 20%)</div>
+                    <div class="legend-item"><div class="legend-color-box" style="background-color: #666;"></div> <b>Not Selected Country</b></div>
+                </div>
+            </div>
+        </section>
+        <p class="module3_p_text">Do you understand what stunting mean?</p><br> 
+            <h1 style="color: rgb(255, 255, 201);text-align: center;">It means children cannot grow to their full height and potential…<br>
+            because of long‑term poor nutrition.</h1> 
+        <p class="module3_p_text">The effect is</p> <h1 style="color: red;text-align: center; font-size: 50px;">serious</h1>, <br> 
+        <p class="module3_p_text">children may face weak health, poor learning, and limited futures.</p> <br>
+        <p class="module3_p_text">But stunting is only one part of the story…</p><br>
+    </div>
+
+    <div id="module-3-part3-wrapper">
+    <section id="module5_content" style="background-color: #111; padding: 50px 0;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+
+            <p class="module3_p_text">
+                People who are stunted often face 
+                <span style="color: red; font-size: 1.5em; display: block;">undernourishment…</span>
+                but undernourishment is not only about wasted food… 
+                It is also about poverty, inequality, conflict and climate change… 
+            </p>
+
+            <p class="module3_p_text">
+                All of these limit access to enough healthy food. 
+                <span style="color: rgb(255, 255, 201); display: block;">Wasted food makes the problem worse…</span>
+                Because while some food is thrown away, many people still go hungry. 
+            </p>
+
+            <p class="module3_p_text">
+                This reminds us that hunger is not just about the amount of food produced.
+                <span style="color: rgb(255, 255, 201); display: block;">It is about whether food reaches every single individual…</span>
+            </p>
+            
+            <p class="module3_p_text">
+                The next chart shows the number of undernourished people by region from 2005 to 2023,
+                helping us see how this challenge has changed over time.
+            </p>
+            
+            <h1 style="text-align: center; margin-bottom: 20px; color: yellow;">
+                Number of Undernourished (Millions) by Region (2005-2023)
+            </h1>
+        </div>
+        <div id="chart-and-filter-wrapper" style="display: flex; justify-content: center; max-width: 1200px; margin: 0 auto; gap: 20px;">
+            <div id="region-filter-controls" style="flex-shrink: 0; padding-top: 50px;">
+                <p style="margin: 0; font-weight: bold; color: white;">Filter Regions:</p>
+            </div>
+
+            <div class="chart-container" style="margin-top: 0px; flex-grow: 1;">
+                <div id="timeline-chart-undernourishment"></div>
+            </div>
+        </div>
+    </section>
+    
+    <p class="module3_p_text" style="padding-bottom: 50px;">
+        The chart shows that undernourishment has not disappeared… <br>
+        In some regions the numbers have gone down but in others they remain high. 
+        This reminds us that progress is uneven… <br>
+        and millions of lives are still affected.
+    </p>    
+    </div>
+    <button id="startQuiz" onclick="startQuizNavigation()" style=" 
+    padding: 15px 30px; 
+    font-size: 20px; 
+    background:#4CAF50; /* Green color */
+    color: #111; 
+    border:none; 
+    border-radius:8px; 
+    cursor:pointer; 
+    margin: 40px auto; 
+    display:block;
+    font-weight: bold;
+"> 
+    Start Final Quiz → 
+</button>
+</div>
+</body>
+</html>

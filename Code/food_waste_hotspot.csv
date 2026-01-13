@@ -1,0 +1,97 @@
+Subregions Category,flagCode,country,Year,FoodWastePerCapita,TotalFoodWastePerYear
+South Asia,AF,Afghanistan,2021,82.0,3109153.0
+Western Asia,AM,Armenia,2021,93.0,275195.0
+Western Asia,AZ,Azerbaijan,2021,93.0,934872.0
+Western Asia,BH,Bahrain,2021,132.0,216161.0
+South Asia,BD,Bangladesh,2021,65.0,10618233.0
+South Asia,BT,Bhutan,2021,79.0,60000.0
+Southeast Asia,BN,Brunei,2021,80.0,34742.0
+Southeast Asia,KH,Cambodia,2021,86.0,1423397.0
+East Asia,CN,China,2021,64.0,91646213.0
+Western Asia,CY,Cyprus,2021,95.0,113312.0
+Western Asia,GE,Georgia,2021,101.0,403573.0
+South Asia,IN,India,2021,50.0,68760163.0
+Southeast Asia,ID,Indonesia,2021,77.0,20938252.0
+Western Asia,IR,Iran,2021,71.0,5884842.0
+Western Asia,IQ,Iraq,2021,120.0,4734434.0
+Western Asia,IL,Israel,2021,100.0,848395.0
+East Asia,JP,Japan,2021,64.0,8159891.0
+Western Asia,JO,Jordan,2021,93.0,939897.0
+Central Asia,KZ,Kazakhstan,2021,76.0,1404584.0
+Western Asia,KW,Kuwait,2021,95.0,397727.0
+Central Asia,KG,Kyrgyzstan,2021,91.0,583951.0
+Southeast Asia,LA,Laos,2021,86.0,618994.0
+Western Asia,LB,Lebanon,2021,105.0,717491.0
+Southeast Asia,MY,Malaysia,2021,91.0,2921577.0
+South Asia,MV,Maldives,2021,71.0,37688.0
+East Asia,MN,Mongolia,2021,78.0,250173.0
+Southeast Asia,MM,Myanmar,2021,86.0,4666125.0
+South Asia,NP,Nepal,2021,79.0,2249412.0
+East Asia,KP,North Korea,2021,81.0,2070528.0
+Western Asia,OM,Oman,2021,95.0,470322.0
+South Asia,PK,Pakistan,2021,74.0,15947645.0
+Western Asia,PS,Palestine,2021,101.0,501602.0
+Southeast Asia,PH,Philippines,2021,86.0,9334477.0
+Western Asia,QA,Qatar,2021,95.0,267739.0
+Western Asia,SA,Saudi Arabia,2021,105.0,3594080.0
+Southeast Asia,SG,Singapore,2021,80.0,465385.0
+East Asia,KR,South Korea,2021,71.0,3658024.0
+South Asia,LK,Sri Lanka,2021,76.0,1617738.0
+Western Asia,SY,Syria,2021,104.0,1771842.0
+Central Asia,TJ,Tajikistan,2021,97.0,906209.0
+Southeast Asia,TH,Thailand,2021,79.0,5478532.0
+Southeast Asia,TL,Timor-Leste,2021,86.0,111643.0
+Western Asia,TR,Turkey,2021,93.0,7762575.0
+Central Asia,TM,Turkmenistan,2021,76.0,449895.0
+Western Asia,AE,United Arab Emirates,2021,95.0,923675.0
+Central Asia,UZ,Uzbekistan,2021,91.0,3001868.0
+Southeast Asia,VN,Vietnam,2021,76.0,7346717.0
+Western Asia,YE,Yemen,2021,104.0,3026946.0
+South Asia,AF,Afghanistan,2024,127.0,5229654.0
+Western Asia,AM,Armenia,2024,102.0,283222.0
+Western Asia,AZ,Azerbaijan,2024,102.0,1055462.0
+Western Asia,BH,Bahrain,2024,132.0,193612.0
+South Asia,BD,Bangladesh,2024,82.0,14101956.0
+South Asia,BT,Bhutan,2024,19.0,15072.0
+Southeast Asia,BN,Brunei,2024,76.0,34109.0
+Southeast Asia,KH,Cambodia,2024,85.0,1419831.0
+East Asia,CN,China,2024,76.0,108667369.0
+Western Asia,CY,Cyprus,2024,71.0,88750.0
+Western Asia,GE,Georgia,2024,101.0,377643.0
+South Asia,IN,India,2024,55.0,78192338.0
+Southeast Asia,ID,Indonesia,2024,53.0,14728364.0
+Western Asia,IR,Iran,2024,93.0,8208360.0
+Western Asia,IQ,Iraq,2024,143.0,6378198.0
+Western Asia,IL,Israel,2024,97.0,874433.0
+East Asia,JP,Japan,2024,60.0,7398006.0
+Western Asia,JO,Jordan,2024,101.0,1136788.0
+Central Asia,KZ,Kazakhstan,2024,88.0,1708990.0
+Western Asia,KW,Kuwait,2024,101.0,1136788.0
+Central Asia,KG,Kyrgyzstan,2024,86.0,568288.0
+Southeast Asia,LA,Laos,2024,89.0,673831.0
+Western Asia,LB,Lebanon,2024,128.0,701828.0
+Southeast Asia,MY,Malaysia,2024,81.0,2754808.0
+South Asia,MV,Maldives,2024,207.0,107877.0
+East Asia,MN,Mongolia,2024,18.0,60364.0
+Southeast Asia,MM,Myanmar,2024,78.0,4221946.0
+South Asia,NP,Nepal,2024,93.0,2831907.0
+East Asia,KP,North Korea,2024,,
+Western Asia,OM,Oman,2024,99.0,451415.0
+South Asia,PK,Pakistan,2024,130.0,30754726.0
+Western Asia,PS,Palestine,2024,102.0,534863.0
+Southeast Asia,PH,Philippines,2024,26.0,2954580.0
+Western Asia,QA,Qatar,2024,93.0,250830.0
+Western Asia,SA,Saudi Arabia,2024,105.0,3818681.0
+Southeast Asia,SG,Singapore,2024,68.0,409182.0
+East Asia,KR,South Korea,2024,95.0,4921086.0
+South Asia,LK,Sri Lanka,2024,76.0,1656148.0
+Western Asia,SY,Syria,2024,172.0,3798032.0
+Central Asia,TJ,Tajikistan,2024,86.0,852861.0
+Southeast Asia,TH,Thailand,2024,86.0,6180468.0
+Southeast Asia,TL,Timor-Leste,2024,78.0,104419.0
+Western Asia,TR,Turkey,2024,102.0,8694318.0
+Central Asia,TM,Turkmenistan,2024,88.0,566433.0
+Western Asia,AE,United Arab Emirates,2024,99.0,930427.0
+Central Asia,UZ,Uzbekistan,2024,86.0,2968299.0
+Southeast Asia,VN,Vietnam,2024,72.0,7079811.0
+Western Asia,YE,Yemen,2024,104.0,3490097.0

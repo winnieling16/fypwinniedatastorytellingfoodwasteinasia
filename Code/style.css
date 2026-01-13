@@ -1,0 +1,721 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Baskerville', serif; /* or 'Lora', 'Georgia', 'Libre Baskerville' */
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #f5f5f5;
+  background-color: #111;
+}
+
+#intro_body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+  transition: background-color 1s ease;
+}
+
+#main_body{
+  overflow: auto;
+}
+ /* Vertical Navigation Menu Styles */
+#vertical-nav-menu {
+    position: fixed;
+    right: 30px; /* Adjust right value to position the menu */
+    top: 50%; 
+    transform: translateY(-50%); 
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    /* Reduced gap because the connector will take space */
+    gap: 0px; 
+    padding: 10px;
+}
+
+/* Wrapper for each dot and its connector */
+.nav-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the dot and connector horizontally */
+}
+
+.nav-dot {
+    position: relative; 
+    display: flex; /* Make it a flex container to center the dot */
+    justify-content: center; /* Center the dot horizontally */
+    align-items: center; /* Center the dot vertically */
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px; /* Added padding to give more clickable area */
+}
+
+.dot {
+    width: 20px; /* Make dots bigger */
+    height: 20px; /* Make dots bigger */
+    background-color: blue; /* Initial blue color for all dots */
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-dot:hover .dot {
+    background-color: yellow; /* Change to yellow on hover */
+    /* You can optionally make it slightly bigger on hover too, e.g.: */
+    /* transform: scale(1.1); */
+}
+
+/* Dot Connector Line */
+.dot-connector {
+    width: 2px; /* Thickness of the line */
+    height: 30px; /* Length of the line between dots */
+    background-color: black; /* Color of the line */
+    margin-top: -5px; /* Adjust to connect cleanly with the dot above */
+    margin-bottom: -5px; /* Adjust to connect cleanly with the dot below */
+}
+
+
+/* Hover Text (Initially Hidden) */
+.hover-text {
+    position: absolute;
+    right: 35px; /* Adjusted distance from the now larger dot */
+    top: 50%;
+    transform: translateY(-50%);
+    
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap; 
+    
+    opacity: 0; 
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    pointer-events: none; 
+    font-family: 'Merriweather', serif; 
+    font-size: 14px;
+}
+
+.nav-dot:hover .hover-text {
+    opacity: 1;
+    visibility: visible;
+}
+.intro_word {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.intro_video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video_container {
+  width: 100%;
+  height: auto;
+  max-height: 100vh;
+  object-fit: contain;
+  background-color: black;
+  position: relative;
+  z-index: 0;
+  display: none;
+}
+
+.overlay_text, .continue_btn {
+  opacity: 0;
+  animation: fadeIn 3s ease-in forwards;
+  animation-delay: 0.5s;
+  z-index: 2;
+}
+
+.overlay_text {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  color: rgb(40, 38, 38);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.continue_btn {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  font-size: 1.2em;
+  background-color: #0fa091;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeIn 3s ease-in forwards;
+  animation-delay: 0.5s;
+  z-index: 2;
+  transition: background-color 0.3 ease, color 0.3s ease;
+}
+
+.continue_btn:hover{
+  background-color: yellow;
+  color: black;
+}
+
+.continue_qbtn{
+  top: 60%;
+  left: 50%;
+  padding: 12px 24px;
+  font-size: 1.2em;
+  background-color: #0fa091;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeIn 3s ease-in forwards;
+  animation-delay: 0.5s;
+  z-index: 2;
+  transition: background-color 0.3 ease, color 0.3s ease;
+}
+
+.continue_qbtn:hover{
+   background-color: yellow;
+  color: black;
+}
+
+.hidden {
+  opacity:0;
+  visibility: hidden;
+}
+
+.visible{
+  display: block;
+}
+
+header video {
+  width: 100%;
+  max-height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+#blackOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0;
+  z-index: 998;
+}
+
+#questionText {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 2em;
+  color: white;
+  opacity: 0;
+  z-index: 999;
+  width: auto;
+  max-width: 90%;
+  font-size: 50px;
+}
+o
+#questionText.show {
+  opacity: 1;
+}
+
+.fade-in{
+  animation: fadeInOverlay 2s ease-in forwards;
+}
+
+.fade-in-text{
+  animation: fadeInOverlay 2s ease-in forwards;
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#scrollOverlay {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+}
+
+#scrollOverlay.fade-in {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+
+#scrollOverlay.fade-in-arrow {
+  animation: fadeInArrow 2s ease-in forwards;
+  visibility: visible;
+}
+
+@keyframes fadeInArrow {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.scrollCue {
+  cursor: pointer;
+}
+
+/*this is the style for page main_page.html*/
+#mainContent{
+  text-align: center;
+  color: white;
+}
+
+.main_text_color{
+  color: black;
+}
+
+#wasteCount {
+  font-weight: bold;
+  color:yellow;
+  font-size: 1.5em;
+  margin-left: -180px;
+}
+
+/* .fade_section {
+  padding: 60px 20px;
+} */
+
+.fade_content {
+  display: flex;
+  align-items: center;
+  /*justify-content: space-between;*/
+  gap: 2rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade_content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.left_icon {
+  height: auto;
+  max-width: 35vw;
+  margin-left: 165px;
+  margin-top: -350px;
+}
+
+.fade_text {
+  max-width: 500px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.journal_link {
+  color: inherit;         /* Keeps the text color same as surrounding text */
+  text-decoration: none;  /* Removes underline */
+  cursor: pointer;        /* Shows pointer on hover */
+}
+
+.journal_link:hover {
+  text-decoration: underline; /* Optional: add underline on hover */
+  color: #003f5c;
+}
+
+.explanation{
+  font-size: 35px;
+  text-align: justify;
+  margin-top: -75px;
+}
+
+.icon{
+  width: 80px;
+  height: auto;
+  max-width: 20vw;
+}
+
+.hero_section {
+  position: relative;
+  margin-top: -45px;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#sarawak_map {
+  width: 100%;
+  /* height: 100%; */
+  object-fit: cover;
+  display: block;
+  margin-top: -50px;
+}
+
+.hero_overlay {
+  position: absolute;
+  margin-top: 80px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+  z-index: 2;
+}
+
+.site_data_1{
+  margin-top: 600px;
+  margin-left: -100px;
+}
+
+.news_link_1{
+  color: white;
+  font-size: 20px;
+}
+
+/* .news_link_1:hover{
+  text-decoration: underline;
+  color: yellow;
+} */
+
+#headline {
+  font-size: 3rem;
+  color: #222;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#organicPieChart{
+  margin-left: -200px;
+}
+
+.fade_in_pie_chart {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade_in_pie_chart.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.text_pie_chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px; /* spacing between chart and text */
+  margin-top: 60px;
+  flex-wrap: wrap; /* allows stacking on small screens */
+}
+
+.fade_in_pie_chart img {
+  max-width: 800px;
+  height: auto;
+}
+
+.explain_pie_chart {
+  max-width: 400px;
+  font-size: 28px;
+  color: #333;
+  text-align: justify;
+}
+
+.explain_butterfly_chart{
+  font-size: 28px;
+  color: #333;
+  text-align: justify;
+  margin-left: 450px;
+}
+
+.note_assumption_ai{
+  margin-left: 250px;
+  margin-right: 250px;
+  font-size: 15px;
+  text-align: justify;
+}
+
+.fade-in-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  will-change: opacity, transform;
+  text-align: center;         /* ⬅️ This centers the text */
+  width: 100%;
+  margin: 40px auto;
+}
+
+.fade-in-text.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.fade-in-line {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  font-size: 28px;
+  color: #333; /* or white if on dark background */
+  text-align: center;
+  margin: 60px auto;
+  /* max-width: 800px; */
+}
+
+.fade-in-line.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.fade-line {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  font-size: 28px;
+  color: #333; /* or white if on dark background */
+  text-align: center;
+  margin: 60px auto;
+  max-width: 800px;
+}
+
+.fade-line.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/*lock part*/
+.scroll-lock-wrapper {
+  height: 300vh;
+  position: relative;
+}
+
+.scroll-lock-inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.background-image {
+  position: absolute;
+  top: 0; 
+  width: 100%;
+  height: 920px;
+  background-image: url('../asset/bg_typical_food.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.background-image-2{
+  position: absolute;
+  top: 0; 
+  width: 100%;
+  height: 920px;
+  background-image: url('../asset/bg_module_2_intro.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  z-index: 2;
+}
+
+.scroll-content {
+  position: relative;
+  z-index: 3;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.scroll-fade {
+  font-size: 35px;
+  color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  margin: 40px 0;
+  text-align: center;
+}
+
+
+.gas-impact-section {
+  /* height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FAF9F6;
+  padding: 30px 20px;
+}
+
+.gas-text-container {
+  text-align: center;
+  max-width: 800px;
+}
+
+.fade-line {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  font-size: 28px;
+  color: #333;
+  /* margin: 20px 0; */
+}
+
+.fade-line.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.gas-count {
+  font-size: 100px;
+  font-weight: bold;
+  color: #0fa091;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  margin: 20px 0;
+}
+.gas-count.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/*testing stage part*/
+.co2e-scroll-lock {
+  height: 500vh;
+  position: relative;
+}
+
+.co2e-sticky-inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  background-color: #000000;
+  overflow: hidden;
+}
+
+.map-left {
+  width: 50%;
+  position: relative;
+}
+
+.stage-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 600px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 1;
+}
+
+.stage-image.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.map-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.stage-text {
+  position: absolute;
+  font-size: 28px;
+  color: white;
+  text-align: justify;
+  max-width: 600px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.stage-text.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stage-image,
+.stage-text {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.co2e-scroll-lock {
+  height: 600vh; /* 5 stages + 1 buffer stage */
+  position: relative;
+}
+
+
+.typical_food_bg {
+   position: absolute;
+  top: 0; left: 205px;
+  width: 1080px;
+  height: 920px;
+  background-image: url('../asset/bg_typical_food.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+
