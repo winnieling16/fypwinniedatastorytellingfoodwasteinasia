@@ -346,11 +346,14 @@ function initModule1ScrollFades() {
         module3Loaded = true;
         console.log("Fetching Module 3 Content...");
 
+        document.body.style.backgroundColor = "#111111";
+
         const nextSection = document.getElementById('nextSection');
         
         // Dynamically create the container for Module 3 content after Module 2
         const newModule3Container = document.createElement('div');
         newModule3Container.id = 'nextSection3';
+        newModule3Container.style.backgroundColor = "#111111";
         nextSection.parentNode.insertBefore(newModule3Container, nextSection.nextSibling);
 
         (async () => {
