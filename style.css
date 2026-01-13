@@ -543,7 +543,7 @@ o
   top: 0; 
   width: 100%;
   height: 920px;
-  background-image: url('../asset/bg_typical_food.jpg');
+  background-image: url('bg_typical_food.jpg');
   background-size: cover;
   background-position: center;
   z-index: 1;
@@ -554,7 +554,7 @@ o
   top: 0; 
   width: 100%;
   height: 920px;
-  background-image: url('../asset/bg_module_2_intro.jpg');
+  background-image: url('bg_module_2_intro.jpg');
   background-size: cover;
   background-position: center;
   z-index: 1;
@@ -712,7 +712,7 @@ o
   top: 0; left: 205px;
   width: 1080px;
   height: 920px;
-  background-image: url('../asset/bg_typical_food.jpg');
+  background-image: url('bg_typical_food.jpg');
   background-size: cover;
   background-position: center;
   z-index: 1;
