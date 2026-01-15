@@ -635,7 +635,7 @@ function initModule3Part1IconChart() {
         d3.select("#country-flag").attr("src", flagMap[selectedCountry] || PLACEHOLDER_IMG_SRC);
         d3.select("#country-name").text(selectedCountry);
         d3.select("#total-waste").text(filteredData.TotalFoodWastePerYear.toLocaleString());
-        d3.select("#people-fed").text(filteredData.CanFeedHowManyPeople.toLocaleString() + " thousand meals");
+        d3.select("#people-fed").text(filteredData.CanFeedHowManyPeople.toLocaleString() + " thousand people");
 
         const iconSize = 60;
         const iconPadding = 30;
