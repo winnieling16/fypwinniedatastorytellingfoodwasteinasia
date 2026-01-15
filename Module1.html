@@ -338,53 +338,56 @@ function initModule1ScrollFades() {
     }
 
     // --- DYNAMIC LOADER FOR MODULE 3 ---
-    function loadChapter3() {
-        if (module3Loaded) {
-            document.getElementById('nextSection3').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            return;
-        }
-        module3Loaded = true;
-        console.log("Fetching Module 3 Content...");
-
-        // document.body.style.backgroundColor = "#111111";
-
-        const nextSection = document.getElementById('nextSection');
-        
-        // Dynamically create the container for Module 3 content after Module 2
-        const newModule3Container = document.createElement('div');
-        newModule3Container.id = 'nextSection3';
-        newModule3Container.style.backgroundColor = "#111111";
-        nextSection.parentNode.insertBefore(newModule3Container, nextSection.nextSibling);
-
-        (async () => {
-            try {
-                const response = await fetch('Module3.html'); 
-                if (!response.ok) throw new Error("Network response was not ok");
-                const html = await response.text();
-
-                newModule3Container.innerHTML = html;
-                newModule3Container.style.opacity = 0;
-                newModule3Container.style.transition = 'opacity 1s ease-out';
-
-                initModule2Observers(newModule3Container); // Reuse observer for text fade-in
-                initModule3ChartsMaster(); // Master initializer for all D3 charts
-
-                await waitForContentToSettle(newModule3Container, 4000);
-
-                requestAnimationFrame(() => {
-                    if (window.ScrollTrigger) {
-                        ScrollTrigger.refresh();
-                    }
-                    newModule3Container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    newModule3Container.style.opacity = 1;
-                    console.log("Module 3 HTML injected, charts initialized, and faded in.");
-                });
-            } catch (err) {
-                console.error('Failed to load Module 3:', err);
-                module3Loaded = false;
-            }
-        })();
+   function loadChapter3() {
+    if (module3Loaded) {
+        document.getElementById('nextSection3').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
     }
+    module3Loaded = true;
+
+    const nextSection = document.getElementById('nextSection');
+    
+    const newModule3Container = document.createElement('div');
+    newModule3Container.id = 'nextSection3';
+    // CRITICAL: Ensure this container has no margins and covers the width
+    newModule3Container.style.backgroundColor = "#111111";
+    newModule3Container.style.margin = "0";
+    newModule3Container.style.padding = "0";
+    newModule3Container.style.width = "100%";
+
+    nextSection.parentNode.insertBefore(newModule3Container, nextSection.nextSibling);
+
+    (async () => {
+        try {
+            const response = await fetch('Module3.html'); 
+            if (!response.ok) throw new Error("Network response was not ok");
+            let html = await response.text();
+
+            newModule3Container.innerHTML = html;
+            
+            // Re-trigger the background color for the specific wrapper inside the HTML
+            const wrapper = newModule3Container.querySelector('#module-3-content-wrapper');
+            if(wrapper) wrapper.style.backgroundColor = "#111111";
+
+            newModule3Container.style.opacity = 0;
+            newModule3Container.style.transition = 'opacity 1s ease-out';
+
+            initModule2Observers(newModule3Container);
+            initModule3ChartsMaster();
+
+            await waitForContentToSettle(newModule3Container, 4000);
+
+            requestAnimationFrame(() => {
+                if (window.ScrollTrigger) ScrollTrigger.refresh();
+                newModule3Container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                newModule3Container.style.opacity = 1;
+            });
+        } catch (err) {
+            console.error('Failed to load Module 3:', err);
+            module3Loaded = false;
+        }
+    })();
+}
 
     // --- MODULE 1 and 2 CHART INITIALIZERS (Existing) ---
     
