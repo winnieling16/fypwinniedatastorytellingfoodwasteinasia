@@ -331,25 +331,34 @@ body {
     }
 
     /* Combined styles for both .text-line and .text-line-2 for uniformity */
-    .text-line, .text-line-2 {
-        font-size: 4rem;
-        line-height: 1.1;
-        font-weight: 800;
-        text-transform: uppercase;
-        margin: 0;
-        letter-spacing: -0.02em;
-        
-        /* 1. Stroke Outline */
-        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-        color: transparent; /* Essential for showing background-clip */
+    /* --- SCROLL ANIMATION STYLES (CONSOLIDATED) --- */
+.text-line, .text-line-2 {
+    font-size: 4rem;
+    line-height: 1.1;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: -0.02em;
+    
+    /* FIX 1: Ensure block display for proper calculation */
+    display: block; 
+    width: 100%;
 
-        /* 2. Fill Gradient (The part animated by GSAP) */
-        background: linear-gradient(90deg, #ffffff 50%, transparent 50%);
-        background-size: 200% 100%;
-        background-position: 100% 0; /* Start hidden (transparent side) */
-        background-clip: text;
-        -webkit-background-clip: text;
-    }
+    /* FIX 2: Stroke and Fill setup */
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0); /* Use rgba for better browser support */
+
+    /* 2. Fill Gradient */
+    background: linear-gradient(90deg, #ffffff 50%, rgba(255, 255, 255, 0) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0; /* Start hidden */
+    
+    background-clip: text;
+    -webkit-background-clip: text;
+    
+    /* Ensure no transitions interfere with GSAP */
+    transition: none !important; 
+}
 
     @media (max-width: 768px) {
         .text-line, .text-line-2 { font-size: 2.5rem; }
